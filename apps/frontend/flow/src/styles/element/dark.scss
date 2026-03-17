@@ -1,0 +1,10 @@
+
+$--colors: (
+  'primary': (
+    'base': #ff7a00
+  )
+);
+
+@forward 'element-plus/theme-chalk/src/dark/var.scss' with (
+  $colors: $--colors
+);

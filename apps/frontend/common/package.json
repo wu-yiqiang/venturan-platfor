@@ -1,0 +1,20 @@
+{
+  "name": "@venturan-platform/common",
+  "private": true,
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "vite"
+  },
+  "dependencies": {
+    "@micro-zoe/micro-app": "1.0.0-rc.26",
+    "@venturan-platform/common": "file:",
+    "@venturan-platform/utils": "workspace:^",
+    "@venturan-platform/vue-pc-ui": "workspace:^"
+  },
+  "devDependencies": {
+    "@arco-design/web-vue": "^2.57.0",
+    "@originjs/vite-plugin-federation": "^1.4.1"
+  }
+}

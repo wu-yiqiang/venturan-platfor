@@ -1,16 +1,18 @@
 {
-  "name": "@venturan-monorepo/root",
+  "name": "@venturan-platform/root",
   "private": true,
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
     "start:all": "pnpm -r --parallel run start",
-    "start:common": "pnpm run --F @venturan-monorepo/common start",
-    "start:mes": "pnpm run --F @venturan-monorepo/mes start",
-    "start:sre": "pnpm run --F @venturan-monorepo/sre start"
+    "start:common": "pnpm run --F @venturan-platform/common start",
+    "start:mes": "pnpm run --F @venturan-platform/mes start",
+    "start:sre": "pnpm run --F @venturan-platform/sre start",
+    "start:flow": "pnpm run --F @venturan-platform/flow start",
+    "build:flow:test": "pnpm run --F @venturan-platform/flow build:test"
   },
   "dependencies": {
-    "@venturan-monorepo/root": "file:",
+    "@venturan-platform/root": "file:",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "vue": "^3.5.17",

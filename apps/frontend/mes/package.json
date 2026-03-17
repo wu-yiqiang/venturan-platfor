@@ -1,0 +1,13 @@
+{
+  "name": "@venturan-platform/mes",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vite"
+  },
+  "dependencies": {
+    "@arco-design/web-react": "^2.66.1",
+    "@venturan-platform/mes": "file:",
+    "@venturan-platform/utils": "workspace:^"
+  }
+}
