@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import { initializeDarkMode } from '@/utils/dark-mode'
 import App from './App.vue'
 import router from './router'
-import { store } from './store'
+import store from './store'
 // normalize.css
 import 'normalize.css/normalize.css'
 // 全局样式
@@ -15,7 +15,6 @@ import 'virtual:svg-icons-register'
 initializeDarkMode()
 
 const app = createApp(App)
-app.use(store)
-app.use(router)
+app.use(store).use(router)
 
 app.mount('#app')

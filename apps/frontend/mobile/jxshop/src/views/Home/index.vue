@@ -19,7 +19,7 @@
           <div class="store-desc">{{ store.address }}</div>
           <div class="store-meta">
             <span class="distance">📍 {{ store.distance }}km</span>
-            <span class="delivery">💰 ¥{{ store.minPrice }}起送</span>
+            <span class="delivery">💰¥{{ store.minPrice }}起送</span>
             <span class="time">⏱️ {{ store.deliveryTime }}分钟</span>
           </div>
         </div>
@@ -32,10 +32,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-// import { useOrderStore } from '@/stores/orderStore';
-
 const router = useRouter();
-// const orderStore = useOrderStore();
 const loading = ref(false);
 const finished = ref(false);
 const storeList = ref<any[]>([]);

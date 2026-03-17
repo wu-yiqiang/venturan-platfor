@@ -11,6 +11,9 @@ importers:
       '@venturan-platform/root':
         specifier: 'file:'
         version: file:(typescript@5.8.3)
+      axios:
+        specifier: ^1.13.2
+        version: 1.13.6(debug@4.4.3)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -347,9 +350,6 @@ importers:
       '@vueuse/core':
         specifier: ^14.2.1
         version: 14.2.1(vue@3.5.30(typescript@5.6.3))
-      axios:
-        specifier: ^1.13.2
-        version: 1.13.6(debug@4.4.3)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -362,6 +362,9 @@ importers:
       pinia:
         specifier: ^2.3.1
         version: 2.3.1(typescript@5.6.3)(vue@3.5.30(typescript@5.6.3))
+      pinia-plugin-persistedstate:
+        specifier: ^4.7.1
+        version: 4.7.1(pinia@2.3.1(typescript@5.6.3)(vue@3.5.30(typescript@5.6.3)))
       sass:
         specifier: ^1.98.0
         version: 1.98.0
@@ -371,12 +374,6 @@ importers:
       vant:
         specifier: ^4.9.21
         version: 4.9.22(vue@3.5.30(typescript@5.6.3))
-      vue:
-        specifier: ^3.5.24
-        version: 3.5.30(typescript@5.6.3)
-      vue-router:
-        specifier: ^4.6.3
-        version: 4.6.4(vue@3.5.30(typescript@5.6.3))
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^7.2.0
@@ -6775,6 +6772,20 @@ packages:
     resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
     engines: {node: '>=6'}
 
+  pinia-plugin-persistedstate@4.7.1:
+    resolution: {integrity: sha512-WHOqh2esDlR3eAaknPbqXrkkj0D24h8shrDPqysgCFR6ghqP/fpFfJmMPJp0gETHsvrh9YNNg6dQfo2OEtDnIQ==}
+    peerDependencies:
+      '@nuxt/kit': '>=3.0.0'
+      '@pinia/nuxt': '>=0.10.0'
+      pinia: '>=3.0.0'
+    peerDependenciesMeta:
+      '@nuxt/kit':
+        optional: true
+      '@pinia/nuxt':
+        optional: true
+      pinia:
+        optional: true
+
   pinia@2.3.1:
     resolution: {integrity: sha512-khUlZSwt9xXCaTbbxFYBKDc/bWAGWJjOgvxETwkTN7KRm66EeT1ZdZj6i2ceh9sP2Pzqsbc704r2yngBrxBVug==}
     peerDependencies:
@@ -8277,11 +8288,6 @@ packages:
     resolution: {integrity: sha512-ogAF3P97NPm8fJsE4by9dwSYtDwXIY1nFY9T6DyQnGHd1E2Da94w9JIolpe42LJGIl0DwOHBi8TcRPlPGwbTtw==}
     peerDependencies:
       vue: ^3.2.0
-
-  vue-router@4.6.4:
-    resolution: {integrity: sha512-Hz9q5sa33Yhduglwz6g9skT8OBPii+4bFn88w6J+J4MfEo4KRRpmiNG/hHHkdbRFlLBOqxN8y8gf2Fb0MTUgVg==}
-    peerDependencies:
-      vue: ^3.5.0
 
   vue-tsc@2.2.12:
     resolution: {integrity: sha512-P7OP77b2h/Pmk+lZdJ0YWs+5tJ6J2+uOQPo7tlBnY44QqQSPYvS0qVT4wqDJgwrZaLe47etJLLQRFia71GYITw==}
@@ -11074,11 +11080,13 @@ snapshots:
 
   '@venturan-platform/root@file:(typescript@5.8.3)':
     dependencies:
+      axios: 1.13.6(debug@4.4.3)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       vue: 3.5.17(typescript@5.8.3)
       vue-router: 4.5.1(vue@3.5.17(typescript@5.8.3))
     transitivePeerDependencies:
+      - debug
       - typescript
 
   '@venturan/vite-plugin-build-compress@1.0.0(@swc/core@1.13.5)(jiti@2.6.1)(less@4.6.4)(lightningcss@1.32.0)(postcss@8.5.8)(sass@1.98.0)(terser@5.46.1)(yaml@2.8.2)':
@@ -11454,12 +11462,6 @@ snapshots:
       '@vue/compiler-ssr': 3.5.30
       '@vue/shared': 3.5.30
       vue: 3.5.30(typescript@5.6.3)
-
-  '@vue/server-renderer@3.5.30(vue@3.5.30(typescript@5.8.3))':
-    dependencies:
-      '@vue/compiler-ssr': 3.5.30
-      '@vue/shared': 3.5.30
-      vue: 3.5.30(typescript@5.8.3)
 
   '@vue/shared@3.5.17': {}
 
@@ -15663,6 +15665,12 @@ snapshots:
   pify@4.0.1:
     optional: true
 
+  pinia-plugin-persistedstate@4.7.1(pinia@2.3.1(typescript@5.6.3)(vue@3.5.30(typescript@5.6.3))):
+    dependencies:
+      defu: 6.1.4
+    optionalDependencies:
+      pinia: 2.3.1(typescript@5.6.3)(vue@3.5.30(typescript@5.6.3))
+
   pinia@2.3.1(typescript@5.4.5)(vue@3.5.30(typescript@5.4.5)):
     dependencies:
       '@vue/devtools-api': 6.6.4
@@ -17529,11 +17537,6 @@ snapshots:
       '@vue/devtools-api': 6.6.4
       vue: 3.5.17(typescript@5.8.3)
 
-  vue-router@4.6.4(vue@3.5.30(typescript@5.6.3)):
-    dependencies:
-      '@vue/devtools-api': 6.6.4
-      vue: 3.5.30(typescript@5.6.3)
-
   vue-tsc@2.2.12(typescript@5.4.5):
     dependencies:
       '@volar/typescript': 2.4.15
@@ -17581,7 +17584,7 @@ snapshots:
       '@vue/compiler-dom': 3.5.30
       '@vue/compiler-sfc': 3.5.30
       '@vue/runtime-dom': 3.5.30
-      '@vue/server-renderer': 3.5.30(vue@3.5.30(typescript@5.8.3))
+      '@vue/server-renderer': 3.5.30(vue@3.5.30(typescript@5.4.5))
       '@vue/shared': 3.5.30
     optionalDependencies:
       typescript: 5.8.3

@@ -53,6 +53,7 @@ export default defineConfig(({ mode }) => {
     server: {
       host: '0.0.0.0',
       port: 8888,
+      hmr: true,
       proxy: {
         '^/dev-api': {
           target: '',
