@@ -1,0 +1,134 @@
+
+.Files {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding: 14px;
+  .topbar {
+      display: flex;
+      column-gap: 10px;
+      margin-bottom: 10px;
+      .search {
+        margin-left: auto;
+      }
+    }
+  .paths {
+    font-size: 16px;
+    font-weight: 400;
+    color: #484bf5;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    .path {
+      cursor: pointer;
+      &::before {
+        content: '>';
+        color: grey;
+        margin: 0 6px;
+      }
+      &:first-child::before {
+        content: "";
+      }
+    }
+  }
+    .Files {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 130px);
+      grid-template-rows: repeat(auto-fit, 130px);
+      flex-wrap: wrap;
+      overflow: auto;
+      row-gap: 10px;
+      .FileType {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 10px;
+        cursor: pointer;
+        flex-wrap: wrap;
+        .file-checkbox {
+          display: flex;
+          align-items: flex-start;
+          column-gap: 4px;
+        }
+        .filename {
+          max-width: 100px;
+          overflow: hidden;
+          text-align: center;
+          text-overflow: ellipsis;
+          flex-wrap: nowrap;
+          white-space: nowrap;
+        }
+      } }
+      .ant-image {
+        display: none !important;
+      }
+}
+
+.PdfDocumentPreview {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  row-gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  .bottombar {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+
+    .toolbar {
+      display: flex;
+      width: fit-content;
+      background-color: #000000;
+      border-radius: 4px;
+      padding: 6px 10px;
+      column-gap: 14px;
+      align-items: center;
+      .opt-icon {
+        cursor: pointer;
+      }
+      .numbers {
+        font-size: 14px;
+        color: #fff;
+        display: grid;
+        place-content: center;
+        display: flex;
+        align-items: center;
+        column-gap: 6px;
+      }
+      .scale {
+        font-size: 14px;
+        color: #fff;
+        display: grid;
+        place-content: center;
+        width: 26px;
+        user-select: none;
+      }
+    }
+  }
+  .topbar {
+    display: flex;
+    justify-content: end;
+    .opt-icon {
+      cursor: pointer;
+    }
+  }
+
+  .PreviewBox {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+  }
+}
+.VideoPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}

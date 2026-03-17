@@ -9,6 +9,8 @@
     "start:mes": "pnpm run --F @venturan-platform/mes start",
     "start:sre": "pnpm run --F @venturan-platform/sre start",
     "start:flow": "pnpm run --F @venturan-platform/flow start",
+    "start:jsms": "pnpm run --F @venturan-platform/jxms start",
+    "start:jxshop": "pnpm run --F @venturan-platform/jxshop start",
     "build:flow:test": "pnpm run --F @venturan-platform/flow build:test"
   },
   "dependencies": {

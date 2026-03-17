@@ -1,5 +1,8 @@
 packages:
  - "apps/backend/*"
- - "apps/frontend/*"
+ - "apps/frontend/desktop/*"
+ - "apps/frontend/mobile/*"
  - "packages/*"
  - "packages/ui/*"
+ - "packages/ui/mobile/*"
+ - "packages/ui/desktop/*"

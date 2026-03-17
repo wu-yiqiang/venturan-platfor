@@ -1,0 +1,8 @@
+.MiddlePieBox {
+  background-color: #0f375f;
+  @include card-frame;
+  .echarts-for-react {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
