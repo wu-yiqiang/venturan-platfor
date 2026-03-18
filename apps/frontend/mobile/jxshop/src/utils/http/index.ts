@@ -4,14 +4,12 @@ import { showFailToast } from 'vant'
 import { ContentTypeEnum, ResultEnum } from '@/enums/request-enum'
 import NProgress from '../progress'
 import 'vant/es/toast/style'
-
-// 默认 axios 实例请求配置
 const configDefault: AxiosRequestConfig = {
   headers: {
     'Content-Type': ContentTypeEnum.JSON,
   },
   timeout: 0, // 按需设置请求超时时间
-  baseURL: import.meta.env.VITE_BASE_API,
+  baseURL: 'http://192.168.1.222:9527/',
   data: {},
 }
 
@@ -52,15 +50,11 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
     NProgress.done()
-    // 与后端协定的返回字段
-    const { code, result } = response.data
-    // 判断请求是否成功
-    const isSuccess
-      = result
-        && Reflect.has(response.data, 'code')
-        && code === ResultEnum.SUCCESS
-    if (isSuccess) {
-      return result
+    const status = response?.status
+    const { data, code } = response.data
+    if (status == 200) {
+      if (code == 200) return data
+      return Promise.reject(response.data)
     }
     else {
       // 处理请求错误

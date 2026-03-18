@@ -5,7 +5,7 @@
       <h1 class="app-title">吉星商城登录</h1>
       <p class="app-subtitle">欢迎回来，发现好物</p>
     </div>
-    <div class="form-card">
+    <div v-if="!registerStatus" class="form-card">
       <form @submit.prevent="handleLogin">
         <!-- 手机号输入 -->
         <div class="input-group">
@@ -45,21 +45,24 @@
       </form>
 
       <div class="footer-links">
-        <!-- <div class="extra-links">
-          <a href="#">忘记密码？</a>
-          <span>|</span>
-          <a href="#">注册账号</a>
-        </div> -->
+        <div class="extra-links">
+          <!-- <a href="#">忘记密码？</a>
+          <span>|</span> -->
+          <a @click="handleRegister">注册账号</a>
+        </div>
       </div>
     </div>
+    <Register v-else @login="handleLoginStatus"/>
   </div>
 </template>
 
 <script setup lang="ts">
+import Register from './Register.vue';
 import { useSysStore } from '@/store/modules/sysStore'
 import { ref, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 const sysStore = useSysStore()
+const registerStatus = ref(false)
 interface LoginForm {
   phone: string;
   code: string;
@@ -72,13 +75,12 @@ interface FormErrors {
   agree: string;
 }
 
-// --- 状态管理 ---
 const router = useRouter();
 const isLoading = ref(false);
 const isPhoneValid = ref(false);
 
 const form = reactive<LoginForm>({
-  phone: '13417967936',
+  phone: '15456780923',
   code: '1234@Abcd',
   agree: false
 });
@@ -133,14 +135,8 @@ const handleLogin = async () => {
   if (!validateForm()) return;
   isLoading.value = true;
   try {
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    // const res = await userLogin({ phone: form.phone, code: form.code });
-    const data = {
-      token: '12121',
-      username: "1212",
-      phone: '1212'
-    }
-    sysStore.setUserInfos(data)
+    const res = await userLogin({ mobile: form.phone, password: form.code });
+    sysStore.setUserInfos(res)
     router.push('/home');
 
   } catch (error) {
@@ -151,9 +147,14 @@ const handleLogin = async () => {
   }
 };
 
-// 组件卸载时清理定时器
+const handleRegister = () => {
+  registerStatus.value = true
+}
+const handleLoginStatus = () => {
+   registerStatus.value = false
+}
+
 import { onBeforeUnmount } from 'vue';
-import { error } from 'console';
 import { userLogin } from '@/api/user';
 onBeforeUnmount(() => {
   if (timer) clearInterval(timer);

@@ -51,13 +51,16 @@ export default defineConfig(({ mode }) => {
       port: 8888,
       hmr: true,
       proxy: {
-        '^/dev-api': {
-          target: '',
-        },
-      },
+        '/prod-api': {
+          target: `http://192.168.1.222:9527/`,
+          changeOrigin: true,
+          ws: false,
+          rewrite: (path) => path.replace(/^\/prod-api/, '')
+        }
+      }
     },
     build: {
-      rolldownOptions: {
+      rollupOptions: {
         output: {
           chunkFileNames: 'static/js/[name]-[hash].js',
           entryFileNames: 'static/js/[name]-[hash].js',
