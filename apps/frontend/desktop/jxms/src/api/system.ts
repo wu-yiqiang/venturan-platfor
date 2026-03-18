@@ -6,33 +6,33 @@ import { MenuSearch } from '@/types/menu'
 
 // 用户管理
 export const getUsersLists = async (data: UserSearch): Promise<any> => {
-  return await requestes.Post(`/user/page`, data)
+  return await requestes.Post(`/admin/page`, data)
 }
 export const postUser = async (data: UserItem): Promise<any> => {
-  return await requestes.Post(`/user/create`, data)
+  return await requestes.Post(`/admin/create`, data)
 }
 
 export const getUserDetail = async (id: number): Promise<any> => {
   if (!id) return
-  return await requestes.Get(`/user/detail/${id}`)
+  return await requestes.Get(`/admin/detail/${id}`)
 }
 
 export const updateUserDetail = async (data: UserItem): Promise<any> => {
   if (!data?.id) return
-  return await requestes.Put(`/user/update`, data)
+  return await requestes.Put(`/admin/update`, data)
 }
 export const updateUserPassword = async (data: UserItem): Promise<any> => {
   if (!data?.id) return
-  return await requestes.Post(`/user/update/password`, data)
+  return await requestes.Post(`/admin/update/password`, data)
 }
 export const updateUserAvatar = async (data: UserItem): Promise<any> => {
   if (!data?.id) return
-  return await requestes.Post(`/user/update_avatar`, data)
+  return await requestes.Post(`/admin/update_avatar`, data)
 }
 
 export const deleteUserItem = async (id: number): Promise<any> => {
   if (!id) return
-  return await requestes.Delete(`/user/delete/${id}`)
+  return await requestes.Delete(`/admin/delete/${id}`)
 }
 
 // 角色管理

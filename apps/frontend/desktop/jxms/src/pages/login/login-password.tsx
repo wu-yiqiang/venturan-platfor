@@ -17,6 +17,7 @@ function LoginPassword() {
     const { data } = await login(params).finally(() => {
       setLoading(false)
     })
+    console.log('撒旦撒', data)
     if (data?.token) {
       const datas = data
       datas.menus = data?.roles.reduce((acc: any, val: any) => acc.concat(val.menus), []);
