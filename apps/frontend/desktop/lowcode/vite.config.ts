@@ -19,7 +19,7 @@ export default defineConfig({
     basicSsl()
   ],
   resolve: {
-    // extensions: ['.js', '.vue', '.json', 'scss', '.ts'],
+    extensions: ['.js', '.vue', '.json', 'scss', '.ts', '.jsx', '.tsx'],
     alias: [
       {
         find: '@',

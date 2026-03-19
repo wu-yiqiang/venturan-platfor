@@ -28,7 +28,7 @@ const type = ref(ComponentTypeEnum.Common)
 </script>
 
 <template>
-    <section class="editMaterial">
+    <section class="EditMaterial">
         <div class="editCategory">
             <el-radio-group v-model="type" size="large">
                 <el-radio-button :value="ComponentTypeEnum.Common">
@@ -76,7 +76,7 @@ const type = ref(ComponentTypeEnum.Common)
 </template>
 
 <style scoped lang="scss">
-.editMaterial {
+.EditMaterial {
     width: 270px;
     height: inherit;
     background-color: #fff;

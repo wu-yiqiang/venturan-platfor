@@ -13,20 +13,20 @@
         </div>
       </div>
     </div>
-    <EditAttrpannel />
+    <EditorPannel :block="lastSelectBlock" :form="value.container" />
   </div>
   <JsonViewDialog v-model:visible="exportVisible" :jsonDatas="jsonDatas" />
   <JsonEditDialog v-model:visible="importVisible" />
   <ViewDailog  v-model:visible="viewVisible" :jsonDatas="jsonDatas" />
 </template>
 <script lang="ts" setup>
-import JsonViewDialog from './components/editTopbar/components/JsonViewDialog.vue';
-import JsonEditDialog from './components/editTopbar/components/JsonEditDialog.vue';
-import EditAttrpannel from './components/editAttrPannel/index.tsx'
-import EditMaterial from './components/editMaterial/index.vue'
-import EditorTop from './components/editTopbar/index.vue'
+import JsonViewDialog from './components/EditTopbar/components/JsonViewDialog.vue';
+import JsonEditDialog from './components/EditTopbar/components/JsonEditDialog.vue';
+import EditorPannel from './components/EditorPannel/index.vue'
+import EditMaterial from './components/EditMaterial/index.vue'
+import EditorTop from './components/EditTopbar/index.vue'
 import EditorBlock from './editor-block'
-import ViewDailog from './components/editTopbar/components/ViewDailog.vue';
+import ViewDailog from './components/EditTopbar/components/ViewDailog.vue';
 import { useBlockFocus } from './hooks/useBlockFocus.ts'
 const emit = defineEmits(['update:value'])
 const props = defineProps({
