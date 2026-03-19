@@ -8,8 +8,8 @@ const configDefault: AxiosRequestConfig = {
   headers: {
     'Content-Type': ContentTypeEnum.JSON,
   },
-  timeout: 0, // 按需设置请求超时时间
-  baseURL: 'http://192.168.1.222:9527/',
+  timeout: 60 * 60 * 3,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   data: {},
 }
 
@@ -51,19 +51,18 @@ axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
     NProgress.done()
     const status = response?.status
-    const { data, code } = response.data
+    const { data, code, msg } = response.data
     if (status == 200) {
       if (code == 200) return data
+      showFailToast(msg)
       return Promise.reject(response.data)
     }
     else {
-      // 处理请求错误
       return Promise.reject(response.data)
     }
   },
   (error: AxiosError) => {
     NProgress.done()
-    // 被取消的请求不弹出错误提示
     if (Axios.isCancel(error)) {
       return Promise.reject(error)
     }

@@ -16,11 +16,15 @@
     "pnpm": ">= 9"
   },
   "scripts": {
-    "start": "vite",
-    "build:test": "run-s build-only type-check",
+    "start": "vite --mode start",
+    "build:dev": "tsc && vite build --mode dev",
+    "build:test": "tsc && vite build --mode test",
+    "build:prod": "tsc && vite build --mode prod",
+    "deploy:dev": "tsc && vite build --mode dev",
+    "deploy:test": "tsc && vite build --mode test",
+    "deploy:prod": "tsc && vite build --mode prod",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "release": "standard-version"

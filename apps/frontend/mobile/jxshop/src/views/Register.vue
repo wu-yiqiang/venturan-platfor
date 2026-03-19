@@ -2,6 +2,11 @@
     <section class='Register'>
         <form @submit.prevent="handleRegister" class="auth-form">
             <div class="form-group">
+                <input v-model="registerForm.name" type="tel" placeholder="请输入名字"
+                    :class="{ error: registerErrors.name }" />
+                <span v-if="registerErrors.name" class="error-msg">{{ registerErrors.name }}</span>
+            </div>
+            <div class="form-group">
                 <input v-model="registerForm.mobile" type="tel" placeholder="请输入手机号"
                     :class="{ error: registerErrors.mobile }" />
                 <span v-if="registerErrors.mobile" class="error-msg">{{ registerErrors.mobile }}</span>
@@ -30,6 +35,7 @@
 
 <script setup lang='ts'>
 import { userRegister } from '@/api/user';
+import { showSuccessToast } from 'vant';
 import { defineComponent, ref, reactive } from 'vue';
 const emit = defineEmits(['register', 'update:visible', 'login'])
 const isSubmitting = ref(false);
@@ -37,14 +43,14 @@ const isSubmitting = ref(false);
 
 // 注册表单
 const registerForm = reactive({
-    mobile: '15456780923',
-    captcha: '',
-    password: '1234@Abcd',
-    confirmPassword: '1234@Abcd',
+    mobile: '',
+    name: '',
+    password: '',
+    confirmPassword: '',
 });
 const registerErrors = reactive({
     mobile: '',
-    captcha: '',
+    name: '',
     password: '',
     confirmPassword: '',
 });
@@ -62,7 +68,10 @@ const toggleMode = () => {
 const validateRegister = (): boolean => {
     let isValid = true;
     Object.keys(registerErrors).forEach(key => (registerErrors as any)[key] = '');
-
+    if (!registerForm.name) {
+        registerErrors.name = '名字不能为空';
+        isValid = false;
+    }
     if (!registerForm.mobile) {
         registerErrors.mobile = '手机号不能为空';
         isValid = false;
@@ -92,8 +101,10 @@ const handleRegister = async () => {
     if (!validateRegister()) return;
     isSubmitting.value = true;
     try {
-        const reqForm = {mobile: registerForm.mobile, password: registerForm.password}
+        const reqForm = {mobile: registerForm.mobile, password: registerForm.password, name: registerForm.name}
         await userRegister(reqForm)
+        showSuccessToast("注册成功，请前往登陆")
+        toggleMode()
     } finally {
         isSubmitting.value = false;
     }

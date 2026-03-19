@@ -80,7 +80,7 @@ const isLoading = ref(false);
 const isPhoneValid = ref(false);
 
 const form = reactive<LoginForm>({
-  phone: '15456780923',
+  phone: '16670860823',
   code: '1234@Abcd',
   agree: false
 });
@@ -125,7 +125,6 @@ const validateForm = (): boolean => {
     errors.agree = '请勾选用户协议'
     isValid = false;
   }
-
   return isValid;
 };
 
@@ -138,10 +137,8 @@ const handleLogin = async () => {
     const res = await userLogin({ mobile: form.phone, password: form.code });
     sysStore.setUserInfos(res)
     router.push('/home');
-
   } catch (error) {
-    console.error('登录失败', error);
-    alert('登录失败，请稍后重试');
+    showFailToast('登陆失败请联系商城管理员')
   } finally {
     isLoading.value = false;
   }
@@ -156,6 +153,7 @@ const handleLoginStatus = () => {
 
 import { onBeforeUnmount } from 'vue';
 import { userLogin } from '@/api/user';
+import { showFailToast } from 'vant';
 onBeforeUnmount(() => {
   if (timer) clearInterval(timer);
 });

@@ -3,9 +3,9 @@
     <div class="user-card">
       <div class="card-content">
         <div class="user-info">
-          <van-image round width="70px" height="70px" :src="userInfo.avatar || defaultAvatar" class="avatar" />
+          <van-image round width="70px" height="70px" :src="defaultAvatar" class="avatar" />
           <div class="info-text">
-            <h2 class="nickname">{{ userInfo.nickname || '点击登录' }}</h2>
+            <h2 class="nickname">{{ userName || '点击登录' }}</h2>
             <!-- <div class="tags" v-if="userInfo.level">
               <van-tag type="danger" size="mini" plain>VIP {{ userInfo.level }}</van-tag>
               <van-tag type="primary" size="mini" plain>金牌会员</van-tag>
@@ -100,8 +100,15 @@ interface ToolItem {
 
 // --- 逻辑处理 ---
 const router = useRouter();
-const defaultAvatar = 'https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg';
-
+const defaultAvatar = computed(() => {
+  const ava = sysStore.userInfos?.avatar
+  return import.meta.env.VITE_STORAGE_BASE_URL+"/"+ava;
+})
+const userName = computed(() => {
+   const name = sysStore.userInfos?.name
+  console.log('sdsd', sysStore.userInfos)
+  return name;
+})
 // 模拟用户状态
 const userInfo = ref<UserInfo>({
   nickname: 'Vue3 开发者',
@@ -111,10 +118,10 @@ const userInfo = ref<UserInfo>({
 
 // 资产数据
 const assetsList = reactive<AssetItem[]>([
-  { label: '余额', value: 1280.50, type: 'balance' },
-  { label: '积分', value: 3500, type: 'points' },
-  { label: '优惠券', value: 12, type: 'coupon' },
-  { label: '收藏', value: 8, type: 'coupon' } // 复用类型或扩展
+  // { label: '余额', value: 1280.50, type: 'balance' },
+  // { label: '积分', value: 3500, type: 'points' },
+  // { label: '优惠券', value: 12, type: 'coupon' },
+  // { label: '收藏', value: 8, type: 'coupon' }
 ]);
 
 // 订单类型
