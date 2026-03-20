@@ -35,7 +35,6 @@ const shopId = computed(() => {
   return Number(route.query.shopId)
 })
 const sysStore = useSysStore()
-console.log("sdsd", sysStore.$state)
 interface Product {
   id: number;
   name: string;
@@ -66,7 +65,7 @@ const getShopsDetails = async () => {
 }
 const getProducts = async () => {
   const data = await getShopCommodities(shopId.value)
-  products.value = data?.map(item => {
+  products.value = data?.map((item: any) => {
     item.count = 0
     item.price = formattedAmountCNY(item?.price)
     return item
@@ -151,7 +150,6 @@ onMounted(() => {
     .total {
       font-size: 16px;
       color: #333;
-
       .amount {
         color: #f44;
         font-weight: bold;

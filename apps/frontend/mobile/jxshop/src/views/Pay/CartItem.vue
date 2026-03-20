@@ -1,72 +1,56 @@
-<!-- src/components/CartItem.vue -->
 <template>
   <div class="cart-item">
     <label class="checkbox-wrapper">
-      <input
-        type="checkbox"
-        :checked="modelValue"
-        @change="handleChange"
-        class="checkbox-input"
-      />
+      <input type="checkbox" :checked="modelValue" @change="handleChange" class="checkbox-input" />
       <span class="checkbox-custom"></span>
     </label>
-
     <div class="item-content">
-      <img :src="item.image" :alt="item.title" class="item-image" />
+      <img :src="avatar(item?.fileName)" class="item-image" />
       <div class="item-info">
-        <h3 class="item-title">{{ item.title }}</h3>
-        <div class="item-price">¥{{ item.price.toFixed(2) }}</div>
+        <h3 class="item-title">{{ item?.name }}</h3>
+        <div class="item-price">¥ {{ item?.price }}</div>
       </div>
+      <van-stepper v-model="item.count" theme="round" :min="1" :max="item?.inventory" button-size="20" disable-input/>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
+<script lang="ts" setup>
+const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    required: true,
+  },
+  item: {
+    type: Object as () => CartItem,
+    required: true,
+  },
+})
+const emit = defineEmits(['update:modelValue'])
 interface CartItem {
   id: number;
-  title: string;
-  desc: string;
+  name: string;
   price: number;
-  image: string;
+  fileName: string;
+  inventory: number
 }
-
-export default defineComponent({
-  name: 'CartItem',
-  props: {
-    modelValue: {
-      type: Boolean,
-      required: true,
-    },
-    item: {
-      type: Object as () => CartItem,
-      required: true,
-    },
-  },
-  emits: ['update:modelValue'],
-  setup(props, { emit }) {
-    const handleChange = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      emit('update:modelValue', target.checked);
-    };
-
-    return {
-      handleChange,
-    };
-  },
-});
+const avatar = (fileName: string) => {
+  if (!fileName) return ''
+  return import.meta.env.VITE_STORAGE_BASE_URL + fileName
+}
+const handleChange = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  emit('update:modelValue', target.checked);
+};
 </script>
 
 <style lang="scss" scoped>
 .cart-item {
   display: flex;
-  padding: 16px;
+  padding: 12px;
   background: white;
-  border-radius: 12px;
+  border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 12px;
-
   .checkbox-wrapper {
     display: flex;
     align-items: center;
@@ -104,9 +88,9 @@ export default defineComponent({
       }
     }
 
-    .checkbox-input:checked + .checkbox-custom {
-      background-color: #ff6700;
-      border-color: #ff6700;
+    .checkbox-input:checked+.checkbox-custom {
+      background-color: #f44;
+      border-color: #f44;
 
       &::after {
         opacity: 1;
@@ -118,7 +102,8 @@ export default defineComponent({
     display: flex;
     flex: 1;
     gap: 16px;
-
+    justify-content: space-between;
+    align-items: center;
     .item-image {
       width: 80px;
       height: 80px;
@@ -130,28 +115,23 @@ export default defineComponent({
     .item-info {
       flex: 1;
       display: flex;
+      flex-wrap: wrap;
       flex-direction: column;
-      justify-content: space-between;
-
+      // justify-content: space-between;
+      word-break: break-all;
+      row-gap: 10px;
       .item-title {
-        font-size: 16px;
+        font-size: 13px;
         font-weight: 600;
         color: #333;
         margin: 0 0 8px 0;
         line-height: 1.4;
-      }
-
-      .item-desc {
-        font-size: 13px;
-        color: #999;
-        margin: 0 0 8px 0;
-        line-height: 1.4;
-      }
+      } 
 
       .item-price {
-        font-size: 16px;
+        font-size: 13px;
         font-weight: bold;
-        color: #ff6700;
+        color: #f44;
       }
     }
   }

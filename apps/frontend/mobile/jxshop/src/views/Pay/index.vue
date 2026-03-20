@@ -8,7 +8,7 @@
                 </header>
             </div>
             <div class="commdoties-container">
-                <Checkout />
+                <Checkout v-if="selectedLists?.length" :checkedlist="selectedLists"/>
             </div>
         </section>
     </van-popup>
@@ -18,6 +18,7 @@
 import { cloneDeep } from 'lodash-es'
 import Checkout from './Checkout.vue'
 const emit = defineEmits(['update:visible'])
+const selectedLists = ref([])
 const props = defineProps({
     visible: {
         type: Boolean,
@@ -34,11 +35,24 @@ const open = computed({
         emit('update:visible', value)
     }
 })
-const selectedLists = computed(() => {
-    return cloneDeep(props?.datas)
+onMounted(() => {
+    selectedLists.value = cloneDeep(props?.datas)
 })
-console.log("ssdsd",)
 </script>
 <style scoped lang='scss'>
-.Pay {}
+.Pay {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    // position: relative;
+    height: 100%;
+    .shop-container {
+        position: sticky;
+    }
+    .commdoties-container {
+        flex: 1;
+        display: flex;
+        overflow: hidden;
+    }
+}
 </style>

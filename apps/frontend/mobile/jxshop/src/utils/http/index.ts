@@ -5,6 +5,7 @@ import { ContentTypeEnum, ResultEnum } from '@/enums/request-enum'
 import NProgress from '../progress'
 import 'vant/es/toast/style'
 import { useSysStore } from '@/store/modules/sysStore'
+import router from '@/router'
 const configDefault: AxiosRequestConfig = {
   headers: {
     'Content-Type': ContentTypeEnum.JSON,
@@ -57,6 +58,9 @@ axiosInstance.interceptors.response.use(
     if (status == 200) {
       if (code == 200) return data
       showFailToast(msg)
+      if (code === 1010002) {
+        router.push({name: "Login"})
+      }
       return Promise.reject(response.data)
     }
     else {
