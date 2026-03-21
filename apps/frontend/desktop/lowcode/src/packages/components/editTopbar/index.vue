@@ -9,19 +9,6 @@
         </el-button>
         返回
       </div>
-      <!-- <div class="fileName">
-        <el-input v-if="editable" v-model="fileName" /> <span v-else>{{ fileName }}</span>
-      </div>
-      <el-button v-if="!editable" link @click="editable = !editable">
-        <el-icon :size="20">
-          <Edit />
-        </el-icon>
-      </el-button>
-      <el-button v-else link @click="editable = !editable">
-        <el-icon :size="20">
-          <Select />
-        </el-icon>
-      </el-button> -->
     </div>
     <div class="middle-actions">
       <el-space>
@@ -52,12 +39,10 @@
   </section>
 </template>
 <script lang="ts" setup>
-import { Back, Edit, RefreshLeft, EditPen, View, Select, Download, Top } from '@element-plus/icons-vue';
-const emit = defineEmits(['copy', 'withdraw', 'flush', 'view', 'export', 'import'])
-// const editable = ref(false)
-// const fileName = ref('demo1')
+import { Back, RefreshLeft, View, Download, Top } from '@element-plus/icons-vue';
+const emit = defineEmits(['copy', 'flush', 'view', 'export', 'import', 'rollback', 'repetition'])
 const handleBack = () => { }
-const handleOpeartion = (operation: string) => {
+const handleOpeartion = (operation:  'copy' | 'flush' | 'view' | 'export' | 'import' | 'repetition' | 'rollback') => {
   emit(operation)
 }
 </script>

@@ -1,11 +1,11 @@
 <template>
   <EditorTop @rollback="handleRollback" @export="handleExport" @import="handleImport" @view="handleView" @repetition="handleRepetition"/>
   <div class="editor">
-    <EditMaterial :componentList="config?.componentList" v-model="data" />
+    <EditMaterial v-model="data" />
     <div class="editor-container">
       <div class="editor-container-canvas">
         <div class="editor-container-canvas_content" :style=containerStyles @mousedown="containerMouseDown">
-          <EditorBlock v-for="(block, index) in data?.blocks" :block="block" :key="index"
+          <EditorBlock v-for="(block, index) in data?.blocks" :block="block" :key="block?.id"
             :class="block?.focus ? 'editor-block-focus' : ''"
             @mousedown="(e: Event) => blockMousedown(e, block, index)" />
           <div v-if="markLine?.x" class="line-x" :style="{ left: markLine?.x + 'px' }"></div>
@@ -58,7 +58,6 @@ const containerStyles = computed({
   set() { }
 })
 const { blockMousedown, containerMouseDown, focusData, lastSelectBlock } = useBlockFocus(data, (e: Event) => { mousedown(e) })
-const config = inject('config')
 let dragState = {
   startX: 0,
   startY: 0,

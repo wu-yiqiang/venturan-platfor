@@ -1,5 +1,7 @@
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent } from 'vue'
 import './editor-block.scss'
+import { cloneDeep } from 'lodash-es'
+import { basicComponents } from '../../utils/editor-config'
 export default defineComponent({
   props: {
     block: {
@@ -18,7 +20,6 @@ export default defineComponent({
       },
       set() {}
     })
-    const config = inject('config')
     const blockRef = ref(null)
 
     onMounted(() => {
@@ -32,8 +33,9 @@ export default defineComponent({
       props.block.height = offsetHeight
     })
     return () => {
-      const component = config.componentMap[props?.block.key]
-      const RenderComponent = component.render(component?.attributes)
+      const component = cloneDeep(basicComponents.find((item) => item.key === props?.block.key))
+      const RenderComponent = component.render(cloneDeep(component?.attributes))
+      console.log('湿答答', props?.block.key, component?.attributes)
       props.block.attributes = component?.attributes ?? {}
       return (
         <div ref={blockRef} class="editor-block" style={blockStyles.value}>

@@ -1,5 +1,5 @@
 import { events } from "../../utils/event"
-
+import {cloneDeep} from 'lodash-es'
 export const useMenuDragger = (containerRef: Ref, data: Ref) => {
   const currentComponent = ref(null)
   const dragenter = (e: { dataTransfer: { dropEffect: string } }) => {
@@ -20,6 +20,7 @@ export const useMenuDragger = (containerRef: Ref, data: Ref) => {
   }
   const drop = (e: { offsetY: any; offsetX: any }) => {
     let blocks = data?.value.blocks
+    console.log('当前', currentComponent.value.attributes)
     data.value = {
       ...data?.value,
       blocks: [
@@ -29,7 +30,9 @@ export const useMenuDragger = (containerRef: Ref, data: Ref) => {
           left: e.offsetX,
           zIndex: 1,
           alignCenter: true,
-          key: currentComponent.value?.key
+          key: currentComponent.value?.key,
+          id: Date.now(),
+          attributes: cloneDeep(currentComponent.value.attributes)
         }
       ]
     }
