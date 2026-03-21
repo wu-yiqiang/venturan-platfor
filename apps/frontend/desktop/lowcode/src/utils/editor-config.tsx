@@ -10,7 +10,6 @@ export const basicComponents = [
         <Tickets />
       </el-icon>
     ),
-    preview: () => '预览文本',
     render: () => '渲染文本',
     key: ComponentTypeEnum.TEXT,
     attributes: {}
@@ -22,10 +21,13 @@ export const basicComponents = [
         <Tickets />
       </el-icon>
     ),
-    preview: () => <ElButton>预览按钮</ElButton>,
     render: () => <ElButton>渲染按钮</ElButton>,
     key: ComponentTypeEnum.BUTTON,
-    attributes: {}
+    attributes: {
+      placeholder: '渲染按钮',
+      width: 60,
+      height: 32
+    }
   },
   {
     label: '输入框',
@@ -34,14 +36,13 @@ export const basicComponents = [
         <Tickets />
       </el-icon>
     ),
-    preview: () => <ElInput placeholder="预览输入框" />,
     render: (props: any) => <ElInput {...props} style={{ width: props?.width + 'px', height: props?.height + 'px' }} v-model={props.value} />,
     key: ComponentTypeEnum.INPUT,
     attributes: {
       text: '输入框',
       value: '',
       placeholder: '请输入',
-      width: 240,
+      width: 200,
       height: 32
     }
   },
@@ -52,9 +53,43 @@ export const basicComponents = [
         <Tickets />
       </el-icon>
     ),
-    preview: () => <ElSelect placeholder="预览选择器" />,
-    render: () => <ElSelect placeholder="渲染选择器" />,
+    render: (props: any) => (
+      <ElSelect
+        placeholder="渲染选择器"
+        {...props}
+        style={{ width: props?.width + 'px', height: props?.height + 'px' }}
+        v-model={props.value}
+        options={[
+          {
+            value: 'Option1',
+            label: 'Option1'
+          },
+          {
+            value: 'Option2',
+            label: 'Option2'
+          },
+          {
+            value: 'Option3',
+            label: 'Option3'
+          },
+          {
+            value: 'Option4',
+            label: 'Option4'
+          },
+          {
+            value: 'Option5',
+            label: 'Option5'
+          }
+        ]}
+      />
+    ),
     key: ComponentTypeEnum.SELECT,
-    attributes: {}
+    attributes: {
+      text: '选择器',
+      value: '',
+      placeholder: '请选择',
+      width: 200,
+      height: 32
+    }
   }
 ]

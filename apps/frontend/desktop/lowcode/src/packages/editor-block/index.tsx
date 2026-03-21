@@ -34,9 +34,7 @@ export default defineComponent({
     })
     return () => {
       const component = cloneDeep(basicComponents.find((item) => item.key === props?.block.key))
-      const RenderComponent = component.render(cloneDeep(component?.attributes))
-      console.log('湿答答', props?.block.key, component?.attributes)
-      props.block.attributes = component?.attributes ?? {}
+      const RenderComponent = component.render(props?.block?.attributes)
       return (
         <div ref={blockRef} class="editor-block" style={blockStyles.value}>
           {RenderComponent}

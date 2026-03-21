@@ -32,7 +32,7 @@ export const useMenuDragger = (containerRef: Ref, data: Ref) => {
           alignCenter: true,
           key: currentComponent.value?.key,
           id: Date.now(),
-          attributes: cloneDeep(currentComponent.value.attributes)
+          attributes: currentComponent.value.attributes
         }
       ]
     }
