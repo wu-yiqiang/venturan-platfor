@@ -36,8 +36,8 @@ const axiosInstance: AxiosInstance = Axios.create(configDefault)
 axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     NProgress.start()
-    const sysStore = useSysStore()
-    const token = sysStore.userInfos?.token
+    const sysStore = useSysStore() as any
+    const token = sysStore?.userInfos?.token
     if (token) {
       config.headers['Authorization'] = token
     }
