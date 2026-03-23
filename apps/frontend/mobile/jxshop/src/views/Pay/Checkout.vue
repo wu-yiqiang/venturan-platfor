@@ -72,22 +72,28 @@ const handleClosePayType = () => {
 }
 const onConfirm = async ({ selectedValues }) => {
   const payType = selectedValues[0]
-  console.log("支付方式", payType)
-  console.log('选择的商品', selectedMap.value)
+  // console.log("支付方式", payType)
+  // console.log('选择的商品', selectedMap.value)
   const submitDatas = cartItems.value.filter((item) => selectedMap.value[item?.id])
-  console.log('提交',submitDatas)
   if (payType === PayType.ALIPAY) {
 
   }
   if (payType === PayType.WEPAY) {
 
   }
-  await handlePaySubmit()
+  await handlePaySubmit(submitDatas)
   handleClosePayType()
 };
-const handlePaySubmit = async () => {
-  const req = {}
-  await payPay(req)
+const handlePaySubmit = async (req: any) => {
+  const reqParams = req?.map((item) => {
+    const it = {
+      commidityId: item?.id,
+      count: item?.count,
+    }
+    return it
+  })
+  console.log("sdsd", reqParams)
+  await payPay(reqParams)
 }
 const selectedCount = computed(() =>
   cartItems.value.filter(item => selectedMap.value[item.id]).reduce((sum, item) => sum + item?.count, 0)
