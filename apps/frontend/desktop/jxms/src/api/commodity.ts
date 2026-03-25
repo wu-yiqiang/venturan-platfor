@@ -63,3 +63,8 @@ export const putShopUp = async (data: any): Promise<any> => {
     if (!data?.id) return
     return await requestes.Post(`/shop/up`, data)
 }
+
+// 订单管理
+export const getOrderPages = async (data: ShopSearch): Promise<any> => {
+    return await requestes.Post('/order/page', data)
+}
