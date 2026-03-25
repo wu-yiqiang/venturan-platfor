@@ -15,10 +15,9 @@ const root: string = process.cwd()
 export default defineConfig(({ mode }) => {
   const envDir = './env'
   const env = loadEnv(mode, envDir)
-  console
   return {
     envDir: envDir,
-    base: env.VITE_PUBLIC_PATH || '/',
+    base: '/jxshop/',
     plugins: [
       vue(),
       vueJsx(),
