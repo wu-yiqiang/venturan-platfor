@@ -82,7 +82,7 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .store-page {
   height: 100dvh;
   background-color: #f5f5f5;

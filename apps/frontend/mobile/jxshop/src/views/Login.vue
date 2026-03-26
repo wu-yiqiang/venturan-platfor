@@ -2,7 +2,7 @@
   <div class="login-container">
     <!-- 顶部装饰背景 -->
     <div class="header-bg">
-      <h1 class="app-title">吉星商城登录</h1>
+      <h1 class="app-title">吉星商城</h1>
       <p class="app-subtitle">欢迎回来，发现好物</p>
     </div>
     <div v-if="!registerStatus" class="form-card">

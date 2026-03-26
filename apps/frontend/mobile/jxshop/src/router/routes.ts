@@ -45,6 +45,24 @@ const routes: Array<RouteRecordRaw> = [
         }
       },
       {
+        path: 'user',
+        name: 'User',
+        component: () => import('@/views/User/index.vue'),
+        meta: {
+          title: '用户信息',
+          bottomTab: false
+        }
+      },
+      {
+        path: 'avatar',
+        name: 'Avatar',
+        component: () => import('@/views/User/avatar.vue'),
+        meta: {
+          title: '头像编辑',
+          bottomTab: false
+        }
+      },
+      {
         path: 'my',
         name: 'My',
         component: () => import('@/views/My/index.vue'),

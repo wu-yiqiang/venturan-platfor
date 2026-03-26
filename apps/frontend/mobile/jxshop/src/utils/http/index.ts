@@ -8,7 +8,7 @@ import { useSysStore } from '@/store/modules/sysStore'
 import router from '@/router'
 const configDefault: AxiosRequestConfig = {
   headers: {
-    'Content-Type': ContentTypeEnum.JSON,
+    // 'Content-Type': ContentTypeEnum.JSON,
   },
   timeout: 60 * 60 * 3,
   baseURL: import.meta.env.VITE_API_BASE_URL,

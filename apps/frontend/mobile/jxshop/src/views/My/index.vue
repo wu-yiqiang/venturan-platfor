@@ -11,6 +11,7 @@
               <van-tag type="primary" size="mini" plain>金牌会员</van-tag>
             </div> -->
           </div>
+          <van-icon name="arrow" @click="handleUserInfo" />
         </div>
 
         <div class="assets-row">
@@ -106,7 +107,7 @@ const defaultAvatar = computed(() => {
   return import.meta.env.VITE_STORAGE_BASE_URL+ava;
 })
 const userName = computed(() => {
-   const name = sysStore.userInfos?.name
+   const name = sysStore.userInfos?.nick_name
   return name;
 })
 // 模拟用户状态
@@ -154,6 +155,9 @@ const navigateToOrder = (type: string) => {
 const handleAssetClick = (type: string) => {
   // showToast(`查看${type}详情`);
 };
+const handleUserInfo = () => {
+    router.push({ name: 'User'});
+}
 
 const formatNumber = (num: number) => {
   return num >= 10000 ? (num / 10000).toFixed(1) + 'w' : num;

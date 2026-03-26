@@ -10,3 +10,7 @@ export function userLogin(data: any) {
 export function userRegister(data: any) {
     return http.post<any>('/user/register', data)
 }
+
+export function userUpdate(data: any) {
+    return http.post<any>('/user/update', data)
+}

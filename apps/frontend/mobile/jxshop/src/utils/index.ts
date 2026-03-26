@@ -19,3 +19,8 @@ export const formattedAmountCent = (yuanAmount: number): number => {
     }
     return cents;
 }
+
+export const avatarUrl = (fileName: string) => {
+    if (!fileName) return ''
+    return import.meta.env.VITE_STORAGE_BASE_URL + fileName
+}
