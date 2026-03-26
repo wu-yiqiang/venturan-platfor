@@ -18,7 +18,7 @@
                                 <div class="count">×{{ item?.Quantity }}</div>
                             </div>
                         </div>
-                        <div class="sum">总金额：¥ {{ formattedAmountCNY(store?.amount) }}</div>
+                        <div class="sum">支付金额：¥ {{ formattedAmountCNY(store?.amount) }}</div>
                     </div>
                 </div>
             </van-list>

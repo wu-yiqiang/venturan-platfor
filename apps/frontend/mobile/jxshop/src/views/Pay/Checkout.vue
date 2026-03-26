@@ -11,24 +11,30 @@
           <div class="select-all-text" @click="toggleSelectAll">{{ isAllSelected ? '取消' : '全选' }}</div>
         </label>
       </div>
-      <div class="footer-center">
-        <div class="total-info">
-          合计：
-          <span class="total-price">¥ {{ totalPrice }}</span>
+      <div class="right-container">
+        <div class="footer-center">
+          <div class="total-info">
+            合计：
+            <span class="total-price">¥ {{ totalPrice }}</span>
+          </div>
+          <div class="total-count">
+            已选 {{ selectedCount }} 件商品
+          </div>
         </div>
-        <div class="total-count">
-          已选 {{ selectedCount }} 件商品
-        </div>
+        <button class="btn pay-btn" :class="{ disabled: selectedCount === 0 }" :disabled="selectedCount === 0"
+          @click="handlePay">
+          去支付
+        </button>
+        <button class="btn helppay-btn" :class="{ disabled: selectedCount === 0 }" :disabled="selectedCount === 0"
+          @click="handleCreateHelpPay">
+          帮代付
+        </button>
       </div>
-      <button class="pay-btn" :class="{ disabled: selectedCount === 0 }" :disabled="selectedCount === 0"
-        @click="handlePay">
-        去支付
-      </button>
     </div>
   </div>
 
   <van-popup v-model:show="open" destroy-on-close round position="bottom">
-    <van-picker title="选择支付方式" :columns="columns"  @confirm="onConfirm" @cancel="handleClosePayType" />
+    <van-picker title="选择支付方式" :columns="columns" @confirm="onConfirm" @cancel="handleClosePayType" />
   </van-popup>
 </template>
 
@@ -90,6 +96,12 @@ const onConfirm = async ({ selectedValues }) => {
   showSuccessToast("支付成功")
   handleClosePayType()
 };
+const handleCreateHelpPay = async () => {
+  const data = await navigator.clipboard?.readText()
+  if (data?.length) {
+    showSuccessToast("已生成代付链接，可分享给好友进行支付")
+  }
+}
 const handlePaySubmit = async (req: any) => {
   const reqParams = req?.map((item) => {
     const it = {
@@ -158,6 +170,7 @@ onMounted(() => {
     background: white;
     padding: 12px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
 
     .footer-left {
@@ -183,50 +196,61 @@ onMounted(() => {
       }
     }
 
-    .footer-center {
-      flex: 1;
-      text-align: right;
-      margin: 0 16px;
+    .right-container {
+      .footer-center {
+        flex: 1;
+        text-align: right;
+        margin: 0 16px;
 
-      .total-info {
-        font-size: 16px;
-        color: #333;
-        margin-bottom: 4px;
+        .total-info {
+          font-size: 16px;
+          color: #333;
+          margin-bottom: 4px;
 
-        .total-price {
-          color: #f44;
-          font-weight: bold;
-          font-size: 18px;
+          .total-price {
+            color: #f44;
+            font-weight: bold;
+            font-size: 18px;
+          }
+        }
+
+        .total-count {
+          font-size: 12px;
+          color: #999;
         }
       }
 
-      .total-count {
-        font-size: 12px;
-        color: #999;
-      }
-    }
-
-    .pay-btn {
-      background: #f44;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      padding: 10px 14px;
-      font-size: 14px;
-      font-weight: bold;
-      min-width: 100px;
-      cursor: pointer;
-      transition: background 0.2s;
-
-      &.disabled {
-        background: #ccc;
-        cursor: not-allowed;
-      }
-
-      &:not(.disabled):active {
+      .btn {
         background: #f44;
+        color: white;
+        border: none;
+        padding: 6px 10px;
+        font-size: 12px;
+        border-radius: 4px;
+        font-weight: bold;
+        min-width: 100px;
+        cursor: pointer;
+        transition: background 0.2s;
+        border: 0.5px solid #f0f0f0;
+        &.disabled {
+          background: #ccc;
+          cursor: not-allowed;
+        }
+
+        &:not(.disabled):active {
+          background: #f44;
+        }
+      }
+
+      .pay-btn {
+        border-radius: 4px 0 0 4px;
+      }
+
+      .helppay-btn {
+        border-radius: 0 4px 4px 0;
       }
     }
+
   }
 }
 </style>

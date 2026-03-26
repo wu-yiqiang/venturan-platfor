@@ -36,15 +36,6 @@ const routes: Array<RouteRecordRaw> = [
         }
       },
       {
-        path: 'orders-details',
-        name: 'OrderDetails',
-        component: () => import('@/views/Orders/details.vue'),
-        meta: {
-          title: '订单详情',
-          bottomTab: false
-        }
-      },
-      {
         path: 'user',
         name: 'User',
         component: () => import('@/views/User/index.vue'),
@@ -92,7 +83,16 @@ const routes: Array<RouteRecordRaw> = [
       title: '登录',
       noCache: true
     }
-  }
+  },
+  {
+    path: '/orders-details',
+    name: 'OrderDetails',
+    component: () => import('@/views/Orders/details.vue'),
+    meta: {
+      title: '代付详情',
+      bottomTab: false
+    }
+  },
 ]
 
 export default routes
