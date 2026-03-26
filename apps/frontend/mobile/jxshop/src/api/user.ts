@@ -14,3 +14,7 @@ export function userRegister(data: any) {
 export function userUpdate(data: any) {
     return http.post<any>('/user/update', data)
 }
+
+export function userLogout() {
+    return http.post<any>('/user/logout')
+}

@@ -67,6 +67,7 @@ import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { showToast } from 'vant';
 import { useSysStore } from '@/store/modules/sysStore'
+import { userLogout } from '@/api/user';
 const sysStore = useSysStore()
 
 // --- 类型定义 ---
@@ -139,7 +140,8 @@ const toolList = reactive<ToolItem[]>([
   // { name: '设置', icon: 'setting-o', color: '#969799', path: '/settings', badge: 1 },
 ]);
 
-const handleExitLogin = () => {
+const handleExitLogin = async () => {
+  await userLogout()
   sysStore.setUserInfos(null)
   router.push({ name: 'Login' });
 }
