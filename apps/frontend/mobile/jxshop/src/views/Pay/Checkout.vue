@@ -43,6 +43,7 @@ import CartItem from './CartItem.vue';
 import { formattedAmountCent, formattedAmountCNY } from '@/utils';
 import { showSuccessToast } from 'vant';
 import router from '@/router';
+import { createPrepaidPaymentLink } from '@/api/pay';
 const emit = defineEmits(['success'])
 const props = defineProps({
   checkedlist: {
@@ -70,12 +71,32 @@ const handleClosePayType = () => {
   emit('success')
   router.push({ path: '/orders' });
 }
-
+const copyToClip = (content: string) => {
+  var aux = document.createElement('input')
+  aux.setAttribute('value', content)
+  document.body.appendChild(aux)
+  aux.select()
+  document.execCommand('copy')
+  document.body.removeChild(aux)
+}
 const handleCreateHelpPay = async () => {
-  const data = await navigator.clipboard?.readText()
+  const data = await handlePaySubmit(cartItems.value)
   if (data?.length) {
-    showSuccessToast("已生成代付链接，可分享给好友进行支付")
+    const baseUrl = `${location.protocol}//${location.host}/jxshop/orders-details?serialNumber=${data}`;
+    copyToClip(baseUrl)
+    showSuccessToast("已生成代付链接，可分享给好友进行代付")
   }
+}
+const handlePaySubmit = async (req: any) => {
+    const reqParams = req?.map((item) => {
+        const it = {
+            commodityId: item?.id,
+            count: item?.count,
+        }
+        return it
+    })
+  const data = await createPrepaidPaymentLink(reqParams)
+  return data 
 }
 const submitDatas = computed(() => {
   return cartItems.value.filter((item) => !selectedMap[item?.id])

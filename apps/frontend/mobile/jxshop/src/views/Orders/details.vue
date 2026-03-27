@@ -11,10 +11,10 @@
                 <div class="top-container">{{ userInfo?.name }}</div>
                 <div class="bottom-container">
                     <div v-if="isUnPay" class="unpay">
-                        <div class="payCount">需付款：￥<span class="count">{{ formStates?.amount }}</span></div>
+                        <div class="payCount">需付款：￥<span class="count">{{ formattedAmountCNY(formStates?.order?.amount) }}</span></div>
                         <div class="payTime">
                             剩余支付时间&nbsp
-                            <van-count-down :time="time"     @change="onChange">
+                            <van-count-down v-if="time" :time="time"@change="onChange">
                                 <template #default="timeData">
                                     <span class="time">{{minutes  }}</span>
                                     &nbsp<strong>:</strong>&nbsp
@@ -36,17 +36,17 @@
                 </div>
             </div>
             <div class="orders">
-                <div v-for="(order, index) in orders" :key="index" class="order">
-                    <div class="title">{{ order?.shop_name }}</div>
+                <div v-for="(order, index) in formStates?.orderItems" :key="index" class="order">
+                    <div class="title">{{ order?.Commodity?.shopId }}</div>
                     <div class="content-container">
                         <div class="image">
-                            <van-image width="50px" height="50px" :src="avatarUrl(sysStore.userInfos?.avatar)" />
+                            <van-image width="50px" height="50px" :src="avatarUrl(order?.Commodity?.fileName)" />
                         </div>
                         <div class="title">
-                            <div class="name">{{ order?.commodity_name }}</div>
-                            <div class="count">× 1</div>
+                            <div class="name">{{ order?.Commodity?.name }}</div>
+                            <div class="count">× {{ order?.Quantity }}</div>
                         </div>
-                        <div class="price">￥{{ order?.price }}</div>
+                        <div class="price">￥{{ order?.Commodity?.price }}</div>
                     </div>
                 </div>
             </div>
@@ -65,14 +65,15 @@
 </template>
 
 <script setup lang="ts">
+import { getPrepaidPaymentDetails } from "@/api/pay";
 import PayDialog from '@/components/PayDialog.vue';
 import { PasswordInput, NumberKeyboard, CountDown  } from 'vant';
-import { avatarUrl } from '@/utils/index'
+import { avatarUrl, formattedAmountCent, formattedAmountCNY } from '@/utils/index'
 import { useRouter } from 'vue-router';
 import { useSysStore } from '@/store/modules/sysStore'
 import { cloneDeep } from 'lodash-es'
 const sysStore = useSysStore()
-const router = useRouter();
+const route = useRoute()
 const showKeyboard = ref(true)
 const password = ref('')
 const submitDatas = computed(() => {
@@ -84,8 +85,9 @@ const userInfo = ref({
 })
 const minutes = ref('00')
 const seconds = ref('00')
-const orders = ref([{ shop_name: '1212', commodity_name: "121212121sds1", count: 1, price: 68 }])
+const orders = ref([])
 const isUnPay = computed(() => {
+    return true
     return formStates.value.status == 1
 })
 const onChange = (data: any) => {
@@ -93,15 +95,17 @@ const onChange = (data: any) => {
     seconds.value = String(data?.seconds)?.padStart(2,'0')
 }
 const isSuccessPay = computed(() => {
+    return true
     return formStates.value.status == 2
 })
 const formStates = ref({
     amount: 95,
     status: 1,
-    timeLeftMinute: 1,
-    timeLeftSecond: 12,
+    timeLeft: 1,
 })
-const time = ref((formStates.value.timeLeftMinute * 60+formStates.value.timeLeftSecond) * 1000)
+const time = computed(() => {
+    return formStates.value?.timeLeft ?  formStates.value?.timeLeft * 1000 : 0
+})
 const handlePay = () => {
     showKeyboard.value = true
     open.value = true
@@ -109,8 +113,13 @@ const handlePay = () => {
 const handleClose = () => {
     // open.value = false
 }
+const init = async () => {
+    const data = await getPrepaidPaymentDetails({ serialNumber: route.query.serialNumber })
+    formStates.value = data ?? {}
+}
 onMounted(() => {
     nextTick(() => {
+        init()
         // userInfo.value = cloneDeep(sysStore.userInfos)
     })
 })

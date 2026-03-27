@@ -9,3 +9,11 @@ export function payPay(data: any) {
 export function getOrders() {
     return http.post<any>('/order/list')
 }
+
+export function createPrepaidPaymentLink(data) {
+    return http.post<any>('/order/create_prepaid_payment_link', data)
+}
+
+export function getPrepaidPaymentDetails(data) {
+    return http.post<any>('/order/query_prepaid_payment', data)
+}

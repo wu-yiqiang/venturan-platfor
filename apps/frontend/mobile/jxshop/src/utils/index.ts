@@ -9,6 +9,7 @@ export const formattedAmountCNY = (amount: number) => {
 }
 
 export const formattedAmountCent = (yuanAmount: number): number => {
+    if (yuanAmount === null) return 0
     let amountStr = String(yuanAmount)?.trim();
     const [integer, decimal = ''] = amountStr?.split('.');
     const decimalPadded = decimal.padEnd(2, '0');
