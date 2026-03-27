@@ -8,18 +8,26 @@
                 <div class="image">
                     <van-image round width="80px" height="80px" :src="avatarUrl(sysStore.userInfos?.avatar)" />
                 </div>
-                <div class="top-container">sdsd1sdsd1</div>
+                <div class="top-container">{{ userInfo?.name }}</div>
                 <div class="bottom-container">
-                    <div class="unpay">
-                        <div class="payCount">需付款：￥<span class="count">98</span></div>
-                        <div class="payTime">剩余支付时间&nbsp<div class="time">02</div>&nbsp<strong>:</strong>&nbsp<div
-                                class="time">13</div>
+                    <div v-if="isUnPay" class="unpay">
+                        <div class="payCount">需付款：￥<span class="count">{{ formStates?.amount }}</span></div>
+                        <div class="payTime">
+                            剩余支付时间&nbsp
+                            <van-count-down :time="time"     @change="onChange">
+                                <template #default="timeData">
+                                    <span class="time">{{minutes  }}</span>
+                                    &nbsp<strong>:</strong>&nbsp
+                                    <span class="time">{{seconds }}</span>
+                                </template>
+                            </van-count-down>
                         </div>
                         <van-button round block type="success" @click="handlePay">
                             为好友买单
                         </van-button>
+                        <PasswordInput :value="password" :focused="showKeyboard" @focus="showKeyboard = true" />
                     </div>
-                    <div class="paysuccess">
+                    <div v-if="isSuccessPay" class="paysuccess">
                         <div class="contents">
                             <div class="title">支付成功</div>
                             <div class="tips">如发生退款，则原路返回</div>
@@ -28,17 +36,17 @@
                 </div>
             </div>
             <div class="orders">
-                <div v-for="(order, index) in [1, 2, 3, 4, 6]" :key="index" class="order">
-                    <div class="title">话满分SaaS阿萨大萨答萨答阿</div>
+                <div v-for="(order, index) in orders" :key="index" class="order">
+                    <div class="title">{{ order?.shop_name }}</div>
                     <div class="content-container">
                         <div class="image">
                             <van-image width="50px" height="50px" :src="avatarUrl(sysStore.userInfos?.avatar)" />
                         </div>
                         <div class="title">
-                            <div class="name">阿三大苏打啊实打实打算啊飒飒大大阿三大苏打阿萨大</div>
+                            <div class="name">{{ order?.commodity_name }}</div>
                             <div class="count">× 1</div>
                         </div>
-                        <div class="price">￥98</div>
+                        <div class="price">￥{{ order?.price }}</div>
                     </div>
                 </div>
             </div>
@@ -53,23 +61,57 @@
         </div>
     </div>
     <input id="image-code" accept="image/*" style="display: none" type="file" />
+    <PayDialog :submitDatas="submitDatas" v-model:open="open" @close="handleClose"/>
 </template>
 
 <script setup lang="ts">
+import PayDialog from '@/components/PayDialog.vue';
+import { PasswordInput, NumberKeyboard, CountDown  } from 'vant';
 import { avatarUrl } from '@/utils/index'
 import { useRouter } from 'vue-router';
 import { useSysStore } from '@/store/modules/sysStore'
 import { cloneDeep } from 'lodash-es'
 const sysStore = useSysStore()
 const router = useRouter();
-const formStates = ref({})
-
+const showKeyboard = ref(true)
+const password = ref('')
+const submitDatas = computed(() => {
+    return orders.value ?? []
+})
+const open = ref(false)
+const userInfo = ref({
+    name: '888'
+})
+const minutes = ref('00')
+const seconds = ref('00')
+const orders = ref([{ shop_name: '1212', commodity_name: "121212121sds1", count: 1, price: 68 }])
+const isUnPay = computed(() => {
+    return formStates.value.status == 1
+})
+const onChange = (data: any) => {
+    minutes.value = String(data?.minutes)?.padStart(2, '0')
+    seconds.value = String(data?.seconds)?.padStart(2,'0')
+}
+const isSuccessPay = computed(() => {
+    return formStates.value.status == 2
+})
+const formStates = ref({
+    amount: 95,
+    status: 1,
+    timeLeftMinute: 1,
+    timeLeftSecond: 12,
+})
+const time = ref((formStates.value.timeLeftMinute * 60+formStates.value.timeLeftSecond) * 1000)
 const handlePay = () => {
-
+    showKeyboard.value = true
+    open.value = true
+}
+const handleClose = () => {
+    // open.value = false
 }
 onMounted(() => {
     nextTick(() => {
-        formStates.value = cloneDeep(sysStore.userInfos)
+        // userInfo.value = cloneDeep(sysStore.userInfos)
     })
 })
 </script>
@@ -161,16 +203,23 @@ $--image-width: 40px;
                         display: flex;
                         align-items: center;
 
-                        .time {
-                            background-color: #000;
-                            color: #fff;
-                            padding: 0px 2px;
-                            display: grid;
-                            place-items: center;
-                            border-radius: 2px;
-                            font-size: 12px;
+                        .van-count-down {
+                            display: flex;
+
+                            .time {
+                                display: inline-block;
+                                background-color: #000;
+                                color: #fff;
+                                padding: 0px 2px;
+                                display: grid;
+                                place-items: center;
+                                border-radius: 2px;
+                                font-size: 12px;
+                            }
                         }
+
                     }
+
                 }
 
                 .paysuccess {
@@ -247,8 +296,9 @@ $--image-width: 40px;
                 font-weight: 600;
                 font-size: 16px;
             }
-            li{
-              font-size: 13px;
+
+            li {
+                font-size: 13px;
             }
         }
     }

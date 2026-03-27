@@ -32,18 +32,15 @@
       </div>
     </div>
   </div>
-
-  <van-popup v-model:show="open" destroy-on-close round position="bottom">
-    <van-picker title="选择支付方式" :columns="columns" @confirm="onConfirm" @cancel="handleClosePayType" />
-  </van-popup>
+  <PayDialog v-if="open && submitDatas?.length" :submitDatas="submitDatas" v-model:open="open" @close="handleClosePayType"/>
 </template>
 
 <script lang="ts" setup>
+import PayDialog from '@/components/PayDialog.vue';
 import { defineComponent, ref, computed, reactive } from 'vue';
 import { cloneDeep } from 'lodash-es'
 import CartItem from './CartItem.vue';
 import { formattedAmountCent, formattedAmountCNY } from '@/utils';
-import { payPay } from '@/api/pay';
 import { showSuccessToast } from 'vant';
 import router from '@/router';
 const emit = defineEmits(['success'])
@@ -62,14 +59,6 @@ interface CartItemData {
 }
 const open = ref(false)
 const cartItems = ref<CartItemData[]>([]);
-enum PayType {
-  ALIPAY = 'alipay',
-  WEPAY = 'wepay'
-}
-const columns = [
-  { text: '支付宝', value: PayType.ALIPAY },
-  { text: '微信支付', value: PayType.WEPAY },
-];
 const selectedMap = ref<Record<number, boolean>>(
   cartItems.value.reduce((acc, item) => {
     acc[item.id] = false;
@@ -81,37 +70,16 @@ const handleClosePayType = () => {
   emit('success')
   router.push({ path: '/orders' });
 }
-const onConfirm = async ({ selectedValues }) => {
-  const payType = selectedValues[0]
-  // console.log("支付方式", payType)
-  // console.log('选择的商品', selectedMap.value)
-  const submitDatas = cartItems.value.filter((item) => selectedMap.value[item?.id])
-  if (payType === PayType.ALIPAY) {
 
-  }
-  if (payType === PayType.WEPAY) {
-
-  }
-  await handlePaySubmit(submitDatas)
-  showSuccessToast("支付成功")
-  handleClosePayType()
-};
 const handleCreateHelpPay = async () => {
   const data = await navigator.clipboard?.readText()
   if (data?.length) {
     showSuccessToast("已生成代付链接，可分享给好友进行支付")
   }
 }
-const handlePaySubmit = async (req: any) => {
-  const reqParams = req?.map((item) => {
-    const it = {
-      commodityId: item?.id,
-      count: item?.count,
-    }
-    return it
-  })
-  await payPay(reqParams)
-}
+const submitDatas = computed(() => {
+  return cartItems.value.filter((item) => !selectedMap[item?.id])
+})
 const selectedCount = computed(() =>
   cartItems.value.filter(item => selectedMap.value[item.id]).reduce((sum, item) => sum + item?.count, 0)
 );

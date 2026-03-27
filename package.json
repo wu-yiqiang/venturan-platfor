@@ -29,7 +29,9 @@
     "vant": "^4.9.21",
     "lodash-es": "^4.17.23",
     "pinia": "^2.3.1",
-    "pinia-plugin-persistedstate": "^4.7.1"
+    "pinia-plugin-persistedstate": "^4.7.1",
+    "dayjs": "^1.11.13",
+    "@vitejs/plugin-basic-ssl": "^1.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.5.2",
