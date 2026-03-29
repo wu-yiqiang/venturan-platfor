@@ -36,6 +36,15 @@ const routes: Array<RouteRecordRaw> = [
         }
       },
       {
+        path: 'ai',
+        name: 'AI',
+        component: () => import('@/views/Ai/index.vue'),
+        meta: {
+          title: 'AI助手',
+          bottomTab: false
+        }
+      },
+      {
         path: 'user',
         name: 'User',
         component: () => import('@/views/User/index.vue'),
@@ -92,7 +101,7 @@ const routes: Array<RouteRecordRaw> = [
       title: '代付详情',
       bottomTab: false
     }
-  },
+  }
 ]
 
 export default routes
