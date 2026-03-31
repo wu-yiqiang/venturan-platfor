@@ -71,15 +71,22 @@ const handleClosePayType = () => {
   emit('success')
   router.push({ path: '/orders' });
 }
-const copyToClip = async (content: string) => {
-  await navigator?.clipboard?.writeText(content);
-  showSuccessToast("已生成代付链接，可分享给好友进行代付")
-}
 const handleCreateHelpPay = async () => {
   const data = await handlePaySubmit(cartItems.value)
   if (data?.length) {
     const baseUrl = `${location.protocol}//${location.host}/jxshop/orders-details?serialNumber=${data}`;
-    await copyToClip(baseUrl)
+    navigator?.clipboard?.writeText(baseUrl);
+    await navigator?.share({
+        title: '吉星商城代付链接',
+        url: baseUrl
+      });
+    // navigator.clipboard.writeText(baseUrl).then(
+    //   () => showSuccessToast("已生成代付链接，可分享给好友进行代付"),
+    //   (err) => {
+    //     console.warn('Clipboard API failed:', err.name);
+    //   }
+    // );
+    // await copyToClip(baseUrl)
   }
 }
 
