@@ -51,10 +51,20 @@
                   </el-col>
                 </el-row>
               </el-col>
+              <el-col :span="24">
+                <el-button v-if="block?.attributes?.options?.every((item: any) => item.value)" text type="primary" @click="handleAdd">
+                  <el-icon><Plus /></el-icon>
+                  添加选项
+                </el-button>
+              </el-col>
             </el-row>
-            <el-button v-if="block?.attributes?.options?.every((item: any) => item.value)" text @click="handleAdd">
-              添加
-            </el-button>
+
+          </el-form-item>
+          <el-form-item v-if="([ComponentTypeEnum.SELECT].includes(block.key))" label="动作设置">
+            <el-row>
+              <el-col :span="24">                  <el-button type="primary" plain :icon="Plus">新建动作</el-button>
+</el-col>
+            </el-row>
           </el-form-item>
         </el-form>
       </template>
@@ -62,7 +72,7 @@
   </section>
 </template>
 <script lang="ts" setup>
-import { Delete } from '@element-plus/icons-vue';
+import { Delete, Plus } from '@element-plus/icons-vue';
 import ButtonTab from '@/components/ButtonTab/index.vue'
 import { ComponentTypeEnum } from '../../../common/const'
 const props = defineProps({

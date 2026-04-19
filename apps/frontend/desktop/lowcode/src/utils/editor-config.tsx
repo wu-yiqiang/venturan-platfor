@@ -79,14 +79,6 @@ export const basicComponents = [
         {
           value: 'Option3',
           label: 'Option3'
-        },
-        {
-          value: 'Option4',
-          label: 'Option4'
-        },
-        {
-          value: 'Option5',
-          label: 'Option5'
         }
       ]
     }
