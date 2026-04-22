@@ -20,7 +20,7 @@ enum PayType {
     WEPAY = 'wepay'
 }
 const columns = [
-    { text: '支付宝', value: PayType.ALIPAY },
+    // { text: '支付宝', value: PayType.ALIPAY },
     { text: '微信支付', value: PayType.WEPAY },
 ];
 const onConfirm = async ({ selectedValues }) => {
