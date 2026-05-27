@@ -43,7 +43,7 @@ export default defineConfig(({ command, mode }) => {
         // 指定symbolId格式
         symbolId: 'icon-[dir]-[name]'
       }),
-      buildCompress(),
+     //  buildCompress(),
       visualizer({
         gzipSize: true,
         brotliSize: true,

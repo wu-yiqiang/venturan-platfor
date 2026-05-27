@@ -1,6 +1,6 @@
 import Users from '@/pages/systems/users/index.vue'
 import Roles from '@/pages/systems/roles/index.vue'
-
+import FilePreview from '@/pages/Files/FilePreview/index.vue'
 export const featureRouters = [
   {
     path: '/systems/roles',
@@ -13,6 +13,14 @@ export const featureRouters = [
   {
     path: '/systems/users',
     component: Users,
+    meta: {
+      title: 'category.title',
+      icon: 'qr'
+    }
+  },
+  {
+    path: '/Files/FilePreview',
+    component: FilePreview,
     meta: {
       title: 'category.title',
       icon: 'qr'

@@ -15,11 +15,11 @@ export default defineConfig({
         './settings': './src/components/settings.vue' // **导出包名**：导出包主入口
       },
       shared: [] // 共享第三方库
-    }),
-    topLevelAwait({
-      promiseExportName: '__tla',
-      promiseImportName: (i) => `__tla_${i}`
     })
+    // topLevelAwait({
+    //   promiseExportName: '__tla',
+    //   promiseImportName: (i) => `__tla_${i}`
+    // })
   ],
   resolve: {
     alias: [
@@ -28,6 +28,10 @@ export default defineConfig({
         replacement: resolve(__dirname, 'src')
       }
     ]
+  },
+  server: {
+    host: '0.0.0.0', // 允许通过局域网 IP 访问
+    cors: true // 开启 CORS（Vite 默认会处理基础的跨域）
   },
   // 为了提高远程请求组件请求速度，可以在打包配置里做一些处理
   build: {

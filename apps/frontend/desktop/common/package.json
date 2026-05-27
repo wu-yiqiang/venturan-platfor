@@ -8,6 +8,7 @@
     "start": "vite"
   },
   "dependencies": {
+    "@flyfish-group/file-viewer3": "^1.0.12",
     "@micro-zoe/micro-app": "1.0.0-rc.26",
     "@venturan-platform/common": "file:",
     "@venturan-platform/utils": "workspace:^",

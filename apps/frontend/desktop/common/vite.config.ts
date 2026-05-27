@@ -21,8 +21,8 @@ export default defineConfig({
         remote_app: {
           // **模块名称**
           // 请求远程组件主入口，这里使用了环境变量，主要是为了开发和生成模式的切换方便
-          external: `Promise.resolve('http://127.0.0.1:5500/dist/assets/remote-app.js')`, // 打包地址
-          // external: `Promise.resolve('http://localhost:5173/settings')`,
+          // external: `Promise.resolve('http://127.0.0.1:5500/dist/assets/remote-app.js')`, // 打包地址
+          external: `Promise.resolve('http://localhost:5173/settings')`,
           // 使用异步加载方式，防止请求时间过长，这也是为什么远程引用需要用vite-plugin-top-level-await的原因
           externalType: 'promise'
         }

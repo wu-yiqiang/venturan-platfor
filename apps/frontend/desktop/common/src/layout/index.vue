@@ -24,6 +24,10 @@
           <IconCalendar />
           MES
         </a-menu-item>
+         <a-menu-item key="0_4" @click="handleFilePreview">
+          <IconCalendar />
+          File Preview
+        </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
@@ -72,6 +76,10 @@ const handleRouter = () => {
 const handleRole = () => {
   isMicroApp.value = false
   router.push('/systems/roles')
+}
+const handleFilePreview = () => {
+  isMicroApp.value = false
+  router.push('/Files/FilePreview')
 }
 const handleMicroApp = () => {
   isMicroApp.value = true
