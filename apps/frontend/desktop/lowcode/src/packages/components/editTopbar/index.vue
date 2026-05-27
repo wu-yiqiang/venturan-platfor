@@ -33,12 +33,22 @@
       </el-space>
     </div>
     <div class="right-actions">
+       <Suspense>
+      <template #default>
+              <MButton />
+      </template>
+      <template #fallback>
+        <div>正在加载远程组件，请稍后...</div>
+      </template>
+    </Suspense>
       <el-button type="primary">保存</el-button>
       <el-button type="primary">发布</el-button>
     </div>
   </section>
 </template>
 <script lang="ts" setup>
+const MButton = defineAsyncComponent(() => import('components_center/MButton'));
+
 import { Back, RefreshLeft, View, Download, Top } from '@element-plus/icons-vue';
 const emit = defineEmits(['copy', 'flush', 'view', 'export', 'import', 'rollback', 'repetition'])
 const handleBack = () => { }

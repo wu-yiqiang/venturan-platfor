@@ -5,7 +5,7 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     hmr: true,
-    port: 8981,
+    port: 8983,
     headers: {
       'access-control-allow-methods': '*',
       'access-control-expose-headers': '*',

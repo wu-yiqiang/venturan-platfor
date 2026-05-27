@@ -64,7 +64,7 @@ export default defineConfig(({ command, mode }) => {
       host: '0.0.0.0',
       https: false,
       hmr: true,
-      port: 8090,
+      port: 8985,
       proxy: {
         '/prod-api': {
           target: `http://192.168.1.222:9527/`,

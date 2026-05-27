@@ -1,11 +1,10 @@
 <template>
   <section class="Roles">
-    <!-- <Settings title="我是common传入的参数"></Settings> -->
+    角色
   </section>
 </template>
 <script lang="ts" setup>
 import { reactive, watch, computed, ref } from 'vue'
-// import Settings from 'remote_app/settings'
 
 </script>
 <style lang="scss" scoped>

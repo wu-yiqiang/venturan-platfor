@@ -46,7 +46,7 @@
         <a-layout-content>
           <RouterView v-if="!isMicroApp" />
           <!-- <micro-app v-else baseroute='/sre' name="sre" inline disableSandbox url="http://192.168.1.222:8982" /> -->
-          <micro-app v-else baseroute='/mes' name="mes" iframe url="http://192.168.1.222:8981" />
+          <micro-app v-else baseroute='/mes' name="mes" iframe url="http://192.168.1.222:8983" />
         </a-layout-content>
         <a-layout-footer>Footer</a-layout-footer>
       </a-layout>

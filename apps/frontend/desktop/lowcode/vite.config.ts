@@ -4,6 +4,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import { resolve } from 'node:path';
+import { federation } from '@module-federation/vite'
+import topLevelAwait from 'vite-plugin-top-level-await'
 
 export default defineConfig({
   plugins: [
@@ -16,7 +18,15 @@ export default defineConfig({
         enabled: true
       }
     }),
-    basicSsl()
+    basicSsl(),
+    topLevelAwait(),
+    federation({
+      name: 'common-app', // 主应用名称
+      remotes: {
+        components_center: 'http://localhost:8980/dist/assets/remoteEntry.js'
+      },
+      shared: []
+    })
   ],
   resolve: {
     extensions: ['.js', '.vue', '.json', 'scss', '.ts', '.jsx', '.tsx'],
@@ -29,7 +39,7 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
-    port: 7799,
+    port: 8982,
     https: true,
     hmr: true
   }

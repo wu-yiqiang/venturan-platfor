@@ -9,8 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@venturan-platform/lowcode": "file:",
     "@element-plus/icons-vue": "^2.3.2",
+    "@venturan-platform/lowcode": "file:",
     "@vitejs/plugin-vue-jsx": "^5.1.3",
     "element-plus": "^2.13.2",
     "lodash-es": "^4.17.23",
@@ -27,10 +27,7 @@
     "sass-loader": "^16.0.6",
     "typescript": "~5.9.3",
     "unplugin-auto-import": "^21.0.0",
-    "vite": "8.0.0-beta.0",
+    "vite": "^8.0.14",
     "vue-tsc": "^3.1.4"
-  },
-  "overrides": {
-    "vite": "^8.0.0"
   }
 }

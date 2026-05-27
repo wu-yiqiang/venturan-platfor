@@ -12,6 +12,7 @@
     "start:jsms": "pnpm run --F @venturan-platform/jxms start",
     "start:jxshop": "pnpm run --F @venturan-platform/jxshop start",
     "start:lowcode": "pnpm run --F @venturan-platform/lowcode start",
+    "build:common:dev": "pnpm run --F @venturan-platform/common build:dev",
     "build:lowcode:dev": "pnpm run --F @venturan-platform/lowcode build:dev",
     "build:flow:test": "pnpm run --F @venturan-platform/flow build:test",
     "build:jxms:test": "pnpm run --F @venturan-platform/jxms build:test",
@@ -19,19 +20,21 @@
     "build:jxshop:test": "pnpm run --F @venturan-platform/jxshop build:test"
   },
   "dependencies": {
+    "@module-federation/vite": "^1.15.5",
     "@venturan-platform/root": "file:",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "vue": "^3.5.17",
-    "vue-router": "^4.5.1",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "axios": "^1.13.2",
-    "sass": "^1.98.0",
-    "vant": "^4.9.21",
+    "dayjs": "^1.11.13",
     "lodash-es": "^4.17.23",
     "pinia": "^2.3.1",
     "pinia-plugin-persistedstate": "^4.7.1",
-    "dayjs": "^1.11.13",
-    "@vitejs/plugin-basic-ssl": "^1.1.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.98.0",
+    "vant": "^4.9.21",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vue": "^3.5.17",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.5.2",
