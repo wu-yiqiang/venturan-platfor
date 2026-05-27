@@ -1,10 +1,10 @@
 {
   "latestErrorEvent": {
     "code": "TYPE-001",
-    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"npx tsc --project /Users/atlas/venturan-platform/apps/frontend/desktop/common/node_modules/.federation/tsconfig.bf4b9713a92fb8eae1a1df8d1eb1fb02.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
+    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"npx tsc --project /Users/atlas/venturan-platform/apps/frontend/desktop/common/node_modules/.federation/tsconfig.180d4e9665ec30f78a14792bbf6d15e7.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
     "args": {
-      "cmd": "npx tsc --project /Users/atlas/venturan-platform/apps/frontend/desktop/common/node_modules/.federation/tsconfig.bf4b9713a92fb8eae1a1df8d1eb1fb02.json"
+      "cmd": "npx tsc --project /Users/atlas/venturan-platform/apps/frontend/desktop/common/node_modules/.federation/tsconfig.180d4e9665ec30f78a14792bbf6d15e7.json"
     },
-    "timestamp": 1779892173180
+    "timestamp": 1779892278135
   }
 }
