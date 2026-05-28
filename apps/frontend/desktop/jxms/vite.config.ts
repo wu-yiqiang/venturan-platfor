@@ -43,14 +43,14 @@ export default defineConfig(({ command, mode }) => {
         // 指定symbolId格式
         symbolId: 'icon-[dir]-[name]'
       }),
-     //  buildCompress(),
+      //  buildCompress(),
       visualizer({
         gzipSize: true,
         brotliSize: true,
         emitFile: false,
         filename: 'visualizer.html',
         open: false
-      }),
+      })
       // autoUpload({
       //   host: envConfig.VITE_HOST,
       //   port: envConfig.VITE_PORT,
@@ -65,6 +65,7 @@ export default defineConfig(({ command, mode }) => {
       https: false,
       hmr: true,
       port: 8985,
+      strictPort: true,
       proxy: {
         '/prod-api': {
           target: `http://192.168.1.222:9527/`,

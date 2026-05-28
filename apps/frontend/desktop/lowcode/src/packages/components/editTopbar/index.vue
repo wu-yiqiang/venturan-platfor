@@ -35,7 +35,7 @@
     <div class="right-actions">
        <Suspense>
       <template #default>
-              <MButton />
+        <MButton />
       </template>
       <template #fallback>
         <div>正在加载远程组件，请稍后...</div>
@@ -47,8 +47,10 @@
   </section>
 </template>
 <script lang="ts" setup>
-const MButton = defineAsyncComponent(() => import('components_center/MButton'));
-
+// import MButton from 'components_center/MButton'
+// const MButton = defineAsyncComponent(() => import('components_center/MButton'));
+const MButton = () => import('components_center/MButton');
+console.log("去你那是谁", MButton)
 import { Back, RefreshLeft, View, Download, Top } from '@element-plus/icons-vue';
 const emit = defineEmits(['copy', 'flush', 'view', 'export', 'import', 'rollback', 'repetition'])
 const handleBack = () => { }

@@ -1,0 +1,38 @@
+(function(e2, n2) {
+  let r = t, i = e2();
+  for (; ; ) try {
+    if (-parseInt(r(241)) / 1 * (-parseInt(r(237)) / 2) + -parseInt(r(243)) / 3 * (parseInt(r(240)) / 4) + parseInt(r(253)) / 5 * (-parseInt(r(236)) / 6) + -parseInt(r(231)) / 7 + -parseInt(r(232)) / 8 + -parseInt(r(247)) / 9 * (parseInt(r(265)) / 10) + -parseInt(r(262)) / 11 * (-parseInt(r(256)) / 12) === n2) break;
+    i.push(i.shift());
+  } catch {
+    i.push(i.shift());
+  }
+})(n, 443457);
+function e(e2) {
+  let n2 = t, r = e2.regex, i = /(?![A-Za-z0-9])(?![$])/, a = r[n2(233)](/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/, i), o = r[n2(233)](/(\\?[A-Z][a-z0-9_\x7f-\xff]+|\\?[A-Z]+(?=[A-Z][a-z0-9_\x7f-\xff])){1,}/, i), s = r.concat(/[A-Z]+/, i), c = { scope: `variable`, match: `\\$+` + a }, l = { scope: n2(239), variants: [{ begin: /<\?php/, relevance: 10 }, { begin: /<\?=/ }, { begin: /<\?/, relevance: 0.1 }, { begin: /\?>/ }] }, u = { scope: n2(266), variants: [{ begin: /\$\w+/ }, { begin: /\{\$/, end: /\}/ }] }, d = e2.inherit(e2.APOS_STRING_MODE, { illegal: null }), f = e2.inherit(e2.QUOTE_STRING_MODE, { illegal: null, contains: e2.QUOTE_STRING_MODE.contains.concat(u) }), p = { begin: /<<<[ \t]*(?:(\w+)|"(\w+)")\n/, end: /[ \t]*(\w+)\b/, contains: e2.QUOTE_STRING_MODE[n2(244)][n2(233)](u), "on:begin": (e3, t2) => {
+    t2.data._beginMatch = e3[1] || e3[2];
+  }, "on:end": (e3, t2) => {
+    t2.data._beginMatch !== e3[1] && t2.ignoreMatch();
+  } }, m = e2[n2(257)]({ begin: /<<<[ \t]*'(\w+)'\n/, end: /[ \t]*(\w+)\b/ }), h = `[ 	
+]`, g = { scope: n2(238), variants: [f, d, p, m] }, _ = { scope: n2(251), variants: [{ begin: `\\b0[bB][01]+(?:_[01]+)*\\b` }, { begin: `\\b0[oO][0-7]+(?:_[0-7]+)*\\b` }, { begin: `\\b0[xX][\\da-fA-F]+(?:_[\\da-fA-F]+)*\\b` }, { begin: `(?:\\b\\d+(?:_\\d+)*(\\.(?:\\d+(?:_\\d+)*))?|\\B\\.\\d+)(?:[eE][+-]?\\d+)?` }], relevance: 0 }, v = [`false`, `null`, `true`], y = `__CLASS__.__DIR__.__FILE__.__FUNCTION__.__COMPILER_HALT_OFFSET__.__LINE__.__METHOD__.__NAMESPACE__.__TRAIT__.die.echo.exit.include.include_once.print.require.require_once.array.abstract.and.as.binary.bool.boolean.break.callable.case.catch.class.clone.const.continue.declare.default.do.double.else.elseif.empty.enddeclare.endfor.endforeach.endif.endswitch.endwhile.enum.eval.extends.final.finally.float.for.foreach.from.global.goto.if.implements.instanceof.insteadof.int.integer.interface.isset.iterable.list.match|0.mixed.new.never.object.or.private.protected.public.readonly.real.return.string.switch.throw.trait.try.unset.use.var.void.while.xor.yield`[n2(267)](`.`), b = `Error|0.AppendIterator.ArgumentCountError.ArithmeticError.ArrayIterator.ArrayObject.AssertionError.BadFunctionCallException.BadMethodCallException.CachingIterator.CallbackFilterIterator.CompileError.Countable.DirectoryIterator.DivisionByZeroError.DomainException.EmptyIterator.ErrorException.Exception.FilesystemIterator.FilterIterator.GlobIterator.InfiniteIterator.InvalidArgumentException.IteratorIterator.LengthException.LimitIterator.LogicException.MultipleIterator.NoRewindIterator.OutOfBoundsException.OutOfRangeException.OuterIterator.OverflowException.ParentIterator.ParseError.RangeException.RecursiveArrayIterator.RecursiveCachingIterator.RecursiveCallbackFilterIterator.RecursiveDirectoryIterator.RecursiveFilterIterator.RecursiveIterator.RecursiveIteratorIterator.RecursiveRegexIterator.RecursiveTreeIterator.RegexIterator.RuntimeException.SeekableIterator.SplDoublyLinkedList.SplFileInfo.SplFileObject.SplFixedArray.SplHeap.SplMaxHeap.SplMinHeap.SplObjectStorage.SplObserver.SplPriorityQueue.SplQueue.SplStack.SplSubject.SplTempFileObject.TypeError.UnderflowException.UnexpectedValueException.UnhandledMatchError.ArrayAccess.BackedEnum.Closure.Fiber.Generator.Iterator.IteratorAggregate.Serializable.Stringable.Throwable.Traversable.UnitEnum.WeakReference.WeakMap.Directory.__PHP_Incomplete_Class.parent.php_user_filter.self.static.stdClass`[n2(267)](`.`), x = { keyword: y, literal: ((e3) => {
+    let n3 = [];
+    return e3.forEach((e4) => {
+      let r2 = t;
+      n3.push(e4), e4.toLowerCase() === e4 ? n3.push(e4[r2(250)]()) : n3[r2(246)](e4.toLowerCase());
+    }), n3;
+  })(v), built_in: b }, S = (e3) => e3.map((e4) => e4[n2(249)](/\|\d+$/, ``)), C = { variants: [{ match: [/new/, r.concat(h, `+`), r[n2(233)](`(?!`, S(b)[n2(248)](`\\b|`), `\\b)`), o], scope: { 1: n2(242), 4: n2(254) } }] }, w = r.concat(a, `\\b(?!\\()`), T = { variants: [{ match: [r.concat(/::/, r.lookahead(/(?!class\b)/)), w], scope: { 2: n2(255) } }, { match: [/::/, /class/], scope: { 2: `variable.language` } }, { match: [o, r[n2(233)](/::/, r.lookahead(/(?!class\b)/)), w], scope: { 1: n2(254), 3: `variable.constant` } }, { match: [o, r.concat(`::`, r.lookahead(/(?!class\b)/))], scope: { 1: `title.class` } }, { match: [o, /::/, /class/], scope: { 1: n2(254), 3: n2(258) } }] }, E = { scope: n2(264), match: r.concat(a, r.lookahead(`:`), r.lookahead(/(?!::)/)) }, D = { relevance: 0, begin: /\(/, end: /\)/, keywords: x, contains: [E, c, T, e2.C_BLOCK_COMMENT_MODE, g, _, C] }, O = { relevance: 0, match: [/\b/, r.concat(n2(235), S(y).join(n2(263)), `|`, S(b)[n2(248)](`\\b|`), n2(245)), a, r.concat(h, `*`), r.lookahead(/(?=\()/)], scope: { 3: `title.function.invoke` }, contains: [D] };
+  D[n2(244)].push(O);
+  let k = [E, T, e2.C_BLOCK_COMMENT_MODE, g, _, C], A = { begin: r.concat(/#\[\s*\\?/, r.either(o, s)), beginScope: `meta`, end: /]/, endScope: `meta`, keywords: { literal: v, keyword: [n2(259), `array`] }, contains: [{ begin: /\[/, end: /]/, keywords: { literal: v, keyword: [`new`, `array`] }, contains: [`self`, ...k] }, ...k, { scope: `meta`, variants: [{ match: o }, { match: s }] }] };
+  return { case_insensitive: false, keywords: x, contains: [A, e2.HASH_COMMENT_MODE, e2.COMMENT(`//`, `$`), e2[n2(252)](`/\\*`, `\\*/`, { contains: [{ scope: `doctag`, match: `@[A-Za-z]+` }] }), { match: /__halt_compiler\(\);/, keywords: `__halt_compiler`, starts: { scope: n2(260), end: e2[n2(234)], contains: [{ match: /\?>/, scope: `meta`, endsParent: true }] } }, l, { scope: n2(258), match: /\$this\b/ }, c, O, T, { match: [/const/, /\s/, a], scope: { 1: `keyword`, 3: `variable.constant` } }, C, { scope: `function`, relevance: 0, beginKeywords: `fn function`, end: /[;{]/, excludeEnd: true, illegal: `[$%\\[]`, contains: [{ beginKeywords: `use` }, e2.UNDERSCORE_TITLE_MODE, { begin: `=>`, endsParent: true }, { scope: `params`, begin: `\\(`, end: `\\)`, excludeBegin: true, excludeEnd: true, keywords: x, contains: [`self`, A, c, T, e2.C_BLOCK_COMMENT_MODE, g, _] }] }, { scope: `class`, variants: [{ beginKeywords: n2(261), illegal: /[($"]/ }, { beginKeywords: `class interface trait`, illegal: /[:($"]/ }], relevance: 0, end: /\{/, excludeEnd: true, contains: [{ beginKeywords: `extends implements` }, e2.UNDERSCORE_TITLE_MODE] }, { beginKeywords: `namespace`, relevance: 0, end: `;`, illegal: /[.']/, contains: [e2.inherit(e2.UNDERSCORE_TITLE_MODE, { scope: `title.class` })] }, { beginKeywords: `use`, relevance: 0, end: `;`, contains: [{ match: /\b(as|const|function)\b/, scope: `keyword` }, e2.UNDERSCORE_TITLE_MODE] }, g, _] };
+}
+function t(e2, t2) {
+  return e2 -= 231, n()[e2];
+}
+function n() {
+  let e2 = `20SSzeQn,title.class,variable.constant,138804oeNspS,END_SAME_AS_BEGIN,variable.language,new,comment,enum,1705yUHowm,\\b|,attr,8557180eaibUT,subst,split,2219217DuTwKc,4922864tsvnWm,concat,MATCH_NOTHING_RE,(?!fn\\b|function\\b|,226602FtBtea,1196708URJZHF,string,meta,12HmBlbX,1fsvFqD,keyword,8607ReUZay,contains,\\b),push,9EjKrus,join,replace,toUpperCase,number,COMMENT`.split(`,`);
+  return n = function() {
+    return e2;
+  }, n();
+}
+export {
+  e as default
+};

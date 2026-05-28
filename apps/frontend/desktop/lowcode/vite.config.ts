@@ -23,9 +23,15 @@ export default defineConfig({
     federation({
       name: 'common-app', // 主应用名称
       remotes: {
-        components_center: 'http://localhost:8980/dist/assets/remoteEntry.js'
+        components_center: 'http://localhost:8980/dist/remoteEntry.js'
       },
-      shared: []
+      shared: {
+        vue: {
+          singleton: true,
+          strictVersion: true,
+        }
+      },
+      dts: false
     })
   ],
   resolve: {
@@ -40,6 +46,7 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 8982,
+    strictPort: true,
     https: true,
     hmr: true
   }

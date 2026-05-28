@@ -17,12 +17,17 @@ export default defineConfig({
     vue(),
     topLevelAwait(),
     federation({
-      name: 'components-center', // 模块名称
+      name: 'components_center', // 模块名称
       filename: 'remoteEntry.js', // 打包后主组件名
       exposes: {
         './MButton': './src/components/MButton.vue'
       },
-      shared: [] // 共享第三方库
+      shared: {
+        vue: {
+          singleton: true,
+          strictVersion: true
+        }
+      }
     })
   ],
   server: {
@@ -39,5 +44,9 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/prod-api/, '')
       }
     }
+  },
+  build: {
+    assetsDir: '.'
+    // emptyOutDir: true
   }
 })

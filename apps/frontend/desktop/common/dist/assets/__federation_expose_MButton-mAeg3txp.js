@@ -1,1 +1,0 @@
-import{K as t,T as e,Q as o,al as s}from"./_plugin-vue_export-helper-BlplNHLE.js";const n={class:"MButton"},c=t({__name:"MButton",setup(a){return(_,r)=>(o(),e("section",n," 模块联邦按钮111 "))}}),u=s(c,[["__scopeId","data-v-6465cdf1"]]);export{u as default};

@@ -10,13 +10,12 @@ export default defineConfig({
       '@': pathResolve('src/')
     }
   },
-  plugins: [
-    vue(),
-  ],
+  plugins: [vue()],
   server: {
     host: '0.0.0.0',
     hmr: true,
     port: 8984,
+    strictPort: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
       'access-control-allow-methods': '*',

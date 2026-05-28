@@ -1,6 +1,6 @@
 <template>
   <section class="MButton">
-    模块联邦按钮111
+    模块联邦按钮111111223
   </section>
 </template>
 <script lang="ts" setup>

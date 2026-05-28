@@ -23,29 +23,30 @@ export default defineConfig(({ mode }) => {
       vueJsx(),
       AutoImport({
         imports: ['vue', 'vue-router', 'pinia', '@vueuse/core'],
-        dts: 'src/typings/auto-imports.d.ts',
+        dts: 'src/typings/auto-imports.d.ts'
       }),
       Components({
         dts: 'src/typings/components.d.ts',
-        resolvers: [VantResolver()],
+        resolvers: [VantResolver()]
       }),
       // svg icon
       createSvgIconsPlugin({
         iconDirs: [path.resolve(root, 'src/icons/svg')],
-        symbolId: 'icon-[dir]-[name]',
+        symbolId: 'icon-[dir]-[name]'
       }),
       viteCompression(),
       basicSsl()
     ],
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url)),
-      },
+        '@': fileURLToPath(new URL('./src', import.meta.url))
+      }
     },
     server: {
       host: '0.0.0.0',
       port: 8888,
       hmr: true,
+      strictPort: true,
       proxy: {
         '/api': {
           target: `http://192.168.1.222:9527/`,
@@ -60,9 +61,9 @@ export default defineConfig(({ mode }) => {
         output: {
           chunkFileNames: 'static/js/[name]-[hash].js',
           entryFileNames: 'static/js/[name]-[hash].js',
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
-        },
-      },
-    },
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+        }
+      }
+    }
   }
 })

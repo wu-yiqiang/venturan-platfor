@@ -16,7 +16,6 @@
     "@venturan-platform/vue-ui": "workspace:^"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.57.0",
-    "vite": "^8.0.14"
+    "@arco-design/web-vue": "^2.57.0"
   }
 }
