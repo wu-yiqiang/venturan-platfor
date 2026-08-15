@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ESNext", "DOM"],
+    "strict": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationMap": true,
+    "isolatedModules": true,
+    "sourceMap": false,
+    "paths": {
+      // "@monorepo/*": ["packages/*/src"] // 当看到 @monorepo/ 开头的导入时，去 packages 目录下找
+      "@/*": ["./src/*"]
+    }
+  },
+}

@@ -1,5 +1,20 @@
 {
-  "files": [],
-  "tsx": "preserve",
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
+  "extends": "./../../../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "types": ["node", "vite/client"],
+    "allowJs": true,
+    "strictFunctionTypes": true,
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "baseUrl": "./"
+  },
+  "include": ["mock/*.ts", "src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "typings/*.d.ts"],
+  "exclude": ["dist", "**/*.js", "node_modules"]
 }
